@@ -5,9 +5,32 @@ export const fetchAllPosts = async () => {
 	try {
 		const response = await fetch(`${API_URL}/posts`);
 		const posts = await response.json();
-		const allPosts = posts.data.posts;
-		return allPosts;
+		// const allPosts = posts.data.posts;
+		return posts;
 	} catch (error) {
 		console.error("Cannot fetch all players", error);
 	}
 };
+
+export const fetchSinglePost = async (postId) => {
+	try {
+		const response = await fetch(`${API_URL}/posts/${postId}`);
+		const post = await response.json();
+		// const singlePost = post.data.player;
+		return post;
+	} catch (error) {
+		console.error("Can't fetch post", error);
+	}
+};
+
+// export async function deletePost(id) {
+// 	try {
+// 		const response = await fetch(`${API_URL}/posts/${id}`, {
+// 			method: "DELETE",
+// 		});
+// 		const result = await response.json();
+// 		return result;
+// 	} catch (error) {
+// 		console.error(error);
+// 	}
+// }

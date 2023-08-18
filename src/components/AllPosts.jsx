@@ -2,20 +2,24 @@
 
 import { useState, useEffect } from "react";
 import { fetchAllPosts } from "../API/STindex";
+import SeePostDetails from "./SeePostDetails";
 
 export default function AllPosts() {
 	const [posts, setPosts] = useState([]);
+	const [error, setError] = useState(null);
 	const [selectedPostId, setSelectedPostId] = useState(null);
-
-	async function getAllPosts() {
-		try {
-			setPosts(await fetchAllPosts());
-		} catch (err) {
-			console.error("Can't get all posts", err);
-		}
-	}
+	const [searchParam, setSearchParam] = useState("");
 
 	useEffect(() => {
+		async function getAllPosts() {
+			const APIResponse = await fetchAllPosts();
+			if (APIResponse.success) {
+				setPosts(APIResponse.data.posts);
+				console.log("posts from GAP", posts);
+			} else {
+				setError(APIResponse.error.message);
+			}
+		}
 		getAllPosts();
 	}, []);
 
@@ -25,6 +29,7 @@ export default function AllPosts() {
 				<h4>BUY AND SELL POSTS</h4>
 			</div>
 			<div id="all-posts-gallery">
+				{error && <p>{error}</p>}
 				{posts.map((post) => {
 					return (
 						<>
@@ -32,14 +37,13 @@ export default function AllPosts() {
 								<h3>{post.title}</h3>
 								<h5>Seller: {post.author.username}</h5>
 								<h5 id="post-price">Price: {post.price}</h5>
-								<h5>Location: {post.location}</h5>
-								<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
-								<p id="post-description">{post.description}</p>
-								{/* <img src={post.imageUrl} alt="dog" /> */}
-								{/* <SeeDetails
-									selectedPuppyId={player.id}
-									setSelectedPuppyId={setSelectedPuppyId}
-								/> */}
+								<SeePostDetails
+									key={post._id}
+									post={post}
+									posts={posts}
+									selectedPostId={post.id}
+									setSelectedPostId={setSelectedPostId}
+								/>
 							</div>
 						</>
 					);
