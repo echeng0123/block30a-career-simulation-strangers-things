@@ -1,7 +1,7 @@
 // This component handles the conditional rendering of the See Details page for the posts
 
 import { useState, useEffect } from "react";
-import { fetchSinglePost } from "../API/STindex";
+import { fetchSinglePost } from "../../API/STindex";
 import PostCard from "./PostCard";
 
 export default function SinglePost({ selectedPostId, setSelectedPostId }) {
