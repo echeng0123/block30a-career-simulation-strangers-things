@@ -1,14 +1,31 @@
-// This component is the home page/landing page for the site. The landing for the page conditionally renders text depending on whether or not a user is logged in.
-import { useState } from "react";
-import SignUpForm from "./SignUpForm";
+// This component is the home page/landing page for the site. Users do not need to be logged in to view this page.
+
+import { useState, useEffect } from "react";
+
+import userService from "./services/user.service.js";
 
 export default function Home() {
-	const [token, setToken] = useState(null);
+	const [content, setContent] = useState("");
+
+	useEffect(() => {
+		userService.getPublicContent().then(
+			(response) => {
+				setContent(response.data);
+			},
+			(error) => {
+				const _content =
+					(error.response && error.response.data) ||
+					error.message ||
+					error.toString();
+
+				setContent(_content);
+			}
+		);
+	}, []);
 
 	return (
 		<>
-			<h1>this is home</h1>
-			<SignUpForm token={token} setToken={setToken} />
+			<div>{content}</div>
 		</>
 	);
 }

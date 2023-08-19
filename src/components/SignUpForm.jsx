@@ -28,7 +28,7 @@ export default function SignUpForm({ token, setToken }) {
 					headers: { "content-type": "application/json" },
 				});
 				const result = await response.json();
-				setToken(result.token);
+				setToken(result.data.token);
 				// console.log("result from signing up ", result);
 				// console.log("token is now: ", result.data.token);
 				result.success
