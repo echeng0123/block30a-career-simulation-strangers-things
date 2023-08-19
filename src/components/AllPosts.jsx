@@ -2,20 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { fetchAllPosts } from "../API/STindex";
-// import SeePostDetails from "./SeePostDetails";
 
 export default function AllPosts() {
 	const [posts, setPosts] = useState([]);
 	const [error, setError] = useState(null);
-	// const [selectedPostId, setSelectedPostId] = useState(null);
-	// const [searchParam, setSearchParam] = useState("");
+	const [searchParam, setSearchParam] = useState("");
 
 	useEffect(() => {
 		async function getAllPosts() {
 			const APIResponse = await fetchAllPosts();
 			if (APIResponse.success) {
 				setPosts(APIResponse.data.posts);
-				// console.log("posts from GAP", posts);
 			} else {
 				setError(APIResponse.error.message);
 			}
@@ -23,14 +20,34 @@ export default function AllPosts() {
 		getAllPosts();
 	}, []);
 
+	const postsToDisplay = searchParam
+		? posts.filter(
+				(post) =>
+					post.title.toLowerCase().includes(searchParam) ||
+					post.description.toLowerCase().includes(searchParam)
+		  )
+		: posts;
+
 	return (
 		<div id="all-posts-container">
 			<div id="all-posts-header">
-				<h4>BUY AND SELL POSTS</h4>
+				<h1>AVAILABLE LISTINGS</h1>
+			</div>
+			<div>
+				<label>
+					Search:{" "}
+					<input
+						type="text"
+						placeholder="Search title or description"
+						onChange={(event) =>
+							setSearchParam(event.target.value.toLowerCase())
+						}
+					/>
+				</label>
 			</div>
 			<div id="all-posts-gallery">
 				{error && <p>{error}</p>}
-				{posts.map((post) => {
+				{postsToDisplay.map((post) => {
 					return (
 						<>
 							<div id="each-post">
@@ -41,12 +58,6 @@ export default function AllPosts() {
 								<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
 								<p id="post-description">{post.description}</p>
 								<button>Message</button>
-								{/* <SeePostDetails
-									key={post._id}
-									post={post}
-									posts={posts}
-									selectedPostId={post.id}
-									setSelectedPostId={setSelectedPostId} */}
 							</div>
 						</>
 					);
