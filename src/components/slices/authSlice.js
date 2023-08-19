@@ -83,4 +83,6 @@ const authSlice = createSlice({
 });
 
 const { reducer } = authSlice;
+
+console.log("end of authSlice reached");
 export default reducer;

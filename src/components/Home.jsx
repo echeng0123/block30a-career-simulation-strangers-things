@@ -7,25 +7,28 @@ import userService from "./services/user.service.js";
 export default function Home() {
 	const [content, setContent] = useState("");
 
-	useEffect(() => {
-		userService.getPublicContent().then(
-			(response) => {
-				setContent(response.data);
-			},
-			(error) => {
-				const _content =
-					(error.response && error.response.data) ||
-					error.message ||
-					error.toString();
+	// useEffect(() => {
+	// 	userService.getPublicContent().then(
+	// 		(response) => {
+	// 			setContent(response.data);
+	// 		},
+	// 		(error) => {
+	// 			const _content =
+	// 				(error.response && error.response.data) ||
+	// 				error.message ||
+	// 				error.toString();
 
-				setContent(_content);
-			}
-		);
-	}, []);
+	// 			setContent(_content);
+	// 		}
+	// 	);
+	// }, []);
 
 	return (
 		<>
-			<div>{content}</div>
+			<div>
+				<h1>this is the home page</h1>
+			</div>
+			{/* <div>{content}</div> */}
 		</>
 	);
 }
