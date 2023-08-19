@@ -32,8 +32,6 @@ export default function AllPosts() {
 		<div id="all-posts-container">
 			<div id="all-posts-header">
 				<h1>AVAILABLE LISTINGS</h1>
-			</div>
-			<div>
 				<label>
 					Search:{" "}
 					<input
