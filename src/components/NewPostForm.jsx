@@ -4,12 +4,12 @@ import { useState } from "react";
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-export default function NewPostForm(tokenKey) {
+export default function NewPostForm({ token, setToken }) {
 	const [postTitle, setpostTitle] = useState("");
 	const [postPrice, setpostPrice] = useState("");
 	const [postLocation, setpostLocation] = useState("");
 	const [postDelivery, setpostDelivery] = useState(false);
-	const [postDescription, setpostDescription] = useState(false);
+	const [postDescription, setpostDescription] = useState("");
 
 	const [successMessage, setSuccessMessage] = useState(null);
 
@@ -19,6 +19,8 @@ export default function NewPostForm(tokenKey) {
 			title: postTitle,
 			price: postPrice,
 			location: postLocation,
+			willDeliver: postDelivery,
+			description: postDescription,
 		};
 		console.log("postData", postData);
 
@@ -28,13 +30,13 @@ export default function NewPostForm(tokenKey) {
 				body: JSON.stringify(postData),
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${tokenKey}`,
+					Authorization: `Bearer ${token}`,
 				},
 			});
-			console.log("response: ", response);
+			console.log("response from NPF: ", response);
 			const result = await response.json();
-			console.log("result", result);
-			setSuccessMessage("Sign up successful");
+			console.log("result from NPF: ", result);
+			setSuccessMessage("Post submitted");
 			// fetchAllPosts();
 			// return postObj;
 		} catch (err) {
@@ -48,37 +50,29 @@ export default function NewPostForm(tokenKey) {
 			<form onSubmit={handleSubmit}>
 				<TextField
 					label="Name"
-					value={postName}
-					onChange={(e) => setpostName(e.target.value)}
+					value={postTitle}
+					onChange={(e) => setpostTitle(e.target.value)}
 				/>
 				<TextField
-					label="Breed"
-					value={postBreed}
-					onChange={(e) => setpostBreed(e.target.value)}
+					label="Price"
+					value={postPrice}
+					onChange={(e) => setpostPrice(e.target.value)}
 				/>
 				<TextField
-					label="Image Url"
-					value={postImage}
-					onChange={(e) => setpostImage(e.target.value)}
+					label="Location"
+					value={postLocation}
+					onChange={(e) => setpostLocation(e.target.value)}
 				/>
-				<input
-					type="radio"
-					id="bench"
-					name="status"
-					value={postStatus}
-					onChange={() => setpostStatus("bench")}
-					label="On Bench"
-				></input>
-				<label htmlFor="bench">On Bench</label>
-				<input
-					type="radio"
-					id="field"
-					name="status"
-					value={postStatus}
-					onChange={() => setpostStatus("field")}
-					label="On Field"
-				></input>
-				<label htmlFor="field">On Field</label>
+				<TextField
+					label="Delivery Available"
+					value={postDelivery}
+					onChange={(e) => setpostDelivery(e.target.value)}
+				/>
+				<TextField
+					label="Description"
+					value={postDescription}
+					onChange={(e) => setpostDescription(e.target.value)}
+				/>
 				<button type="submit">Submit</button>
 			</form>
 		</>

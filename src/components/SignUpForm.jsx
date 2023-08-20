@@ -5,8 +5,8 @@ import { useState } from "react";
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-export default function SignUpForm(props) {
-	const [token, setToken] = useState(null);
+export default function SignUpForm({ token, setToken }) {
+	// const [token, setToken] = useState(null);
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [successMessage, setSuccessMessage] = useState(null);
@@ -49,7 +49,9 @@ export default function SignUpForm(props) {
 	return (
 		<>
 			<h2>Sign up</h2>
-			{successMessage && <p>{successMessage}</p>}
+			{successMessage && <p>{successMessage}</p> && (
+				<p>your token is {token}</p>
+			)}
 			{error && <p>{error}</p>}
 			<form onSubmit={handleSubmit}>
 				<label>
@@ -70,7 +72,7 @@ export default function SignUpForm(props) {
 				<br></br>
 				<button>Submit</button>
 			</form>
-			{props.handleCallback(token)}
+			{/* {props.handleCallback(token)} */}
 		</>
 	);
 }

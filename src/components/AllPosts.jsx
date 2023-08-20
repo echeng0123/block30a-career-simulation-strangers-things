@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { fetchAllPosts } from "../API/STindex";
-// import NewPostForm from "./NewPostForm";
+import SignUpForm from "./SignUpForm";
+import NewPostForm from "./NewPostForm";
 
-export default function AllPosts() {
+export default function AllPosts({ token, setToken }) {
 	const [posts, setPosts] = useState([]);
 	const [error, setError] = useState(null);
 	const [searchParam, setSearchParam] = useState("");
@@ -34,7 +35,13 @@ export default function AllPosts() {
 			<div id="all-posts-header">
 				<h1>AVAILABLE LISTINGS</h1>
 			</div>
-			<div>{/* <NewPostForm tokenKey={tokenKey} /> */}</div>
+			<div>
+				<SignUpForm token={token} setToken={setToken} />
+			</div>
+			<div>
+				<NewPostForm token={token} setToken={setToken} />
+			</div>
+
 			<div>
 				<label>
 					Search:{" "}
