@@ -12,17 +12,6 @@ export const fetchAllPosts = async () => {
 	}
 };
 
-// export const fetchSinglePost = async (postId) => {
-// 	try {
-// 		const response = await fetch(`${API_URL}/posts/${postId}`);
-// 		const post = await response.json();
-// 		// const singlePost = post.data.player;
-// 		return post;
-// 	} catch (error) {
-// 		console.error("Can't fetch post", error);
-// 	}
-// };
-
 // export async function deletePost(id) {
 // 	try {
 // 		const response = await fetch(`${API_URL}/posts/${id}`, {

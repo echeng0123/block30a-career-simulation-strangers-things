@@ -4,7 +4,7 @@ import { useState } from "react";
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-export default function NewPostForm() {
+export default function NewPostForm(tokenKey) {
 	const [postTitle, setpostTitle] = useState("");
 	const [postPrice, setpostPrice] = useState("");
 	const [postLocation, setpostLocation] = useState("");
@@ -19,7 +19,6 @@ export default function NewPostForm() {
 			title: postTitle,
 			price: postPrice,
 			location: postLocation,
-			imageUrl: postImage,
 		};
 		console.log("postData", postData);
 
@@ -27,7 +26,10 @@ export default function NewPostForm() {
 			const response = await fetch(`${API_URL}/posts`, {
 				method: "POST",
 				body: JSON.stringify(postData),
-				headers: { "Content-Type": "application/json" },
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${tokenKey}`,
+				},
 			});
 			console.log("response: ", response);
 			const result = await response.json();

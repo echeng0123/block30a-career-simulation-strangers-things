@@ -5,7 +5,7 @@ import { useState } from "react";
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-export default function SignUpForm() {
+export default function SignUpForm(props) {
 	const [token, setToken] = useState(null);
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
@@ -30,9 +30,10 @@ export default function SignUpForm() {
 					headers: { "content-type": "application/json" },
 				});
 				const result = await response.json();
-				setToken(result.token);
+				setToken(result.data.token);
 				console.log("result from signing up ", result);
-				console.log("token is now: ", result.data.token);
+				console.log("result.data.token is now: ", result.data.token);
+
 				setSuccessMessage("Sign up successful");
 			} else {
 				alert("Username too short. Please enter at least 3 characters.");
@@ -69,6 +70,7 @@ export default function SignUpForm() {
 				<br></br>
 				<button>Submit</button>
 			</form>
+			{props.handleCallback(token)}
 		</>
 	);
 }

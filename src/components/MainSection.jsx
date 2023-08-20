@@ -2,21 +2,20 @@
 
 import { Routes, Route } from "react-router-dom";
 import AllPosts from "./AllPosts";
-// import Profile from "./Profile";
-// import Messages from "./Messages";
+import Profile from "./Profile";
+import Messages from "./Messages";
 // import Login from "./Login";
-// import Home from "./Home";
-import SignUpForm from "./SignUpForm";
+import Home from "./Home";
+// import SignUpForm from "./SignUpForm";
 
 export default function MainSection() {
 	return (
 		<div id="main-section">
-			<SignUpForm />
 			<Routes>
-				{/* <Route path="/home" element={<Home />} /> */}
+				<Route path="/home" element={<Home />} />
 				<Route path="/posts" element={<AllPosts />} />
-				{/* <Route path="/profile" element={<Profile />} /> */}
-				{/* <Route path="/messages" element={<Messages />} /> */}
+				<Route path="/profile" element={<Profile />} />
+				<Route path="/messages" element={<Messages />} />
 				{/* <Route path="/login" element={<Login />} /> */}
 				{/* conditionally render login component text */}
 			</Routes>
