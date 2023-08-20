@@ -11,7 +11,7 @@ import DeletePost from "./DeletePost";
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-export default function AllPosts({ token, setToken }) {
+export default function AllPosts({ userId, setUserId }) {
 	const [posts, setPosts] = useState([]);
 	const [error, setError] = useState(null);
 	const [searchParam, setSearchParam] = useState("");
@@ -53,12 +53,11 @@ export default function AllPosts({ token, setToken }) {
 				<h1>AVAILABLE LISTINGS</h1>
 			</div>
 			<div>
-				<SignUpForm token={token} setToken={setToken} />
+				<SignUpForm />
 			</div>
 			<div>
-				<NewPostForm token={token} setToken={setToken} />
+				<NewPostForm userId={userId} setUserId={setUserId} />
 			</div>
-
 			<div>
 				<label>
 					Search:{" "}

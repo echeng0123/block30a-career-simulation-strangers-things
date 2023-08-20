@@ -8,17 +8,33 @@ import Messages from "./Messages";
 import Home from "./Home";
 // import SignUpForm from "./SignUpForm";
 
-export default function MainSection({ token, setToken }) {
+export default function MainSection({ userId, setUserId }) {
+	// function CallBack(userId) {
+	// 	return (
+	// 		<>
+	// 			{userId}
+	// 			<div>
+	// 				<p>the current userid is {userId}</p>
+	// 			</div>
+	// 		</>
+	// 	);
+	// }
+
 	return (
 		<div id="main-section">
 			<Routes>
-				<Route
-					path="/home"
-					element={<Home token={token} setToken={setToken} />}
-				/>
+				<Route path="/home" element={<Home />} />
 				<Route
 					path="/posts"
-					element={<AllPosts token={token} setToken={setToken} />}
+					element={
+						<AllPosts
+							userId={userId}
+							setUserId={setUserId}
+							// userId={userId}
+							// setUserId={setUserId}
+							// handleCallback={CallBack}
+						/>
+					}
 				/>
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/messages" element={<Messages />} />

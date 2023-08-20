@@ -1,14 +1,17 @@
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import AllPosts from "./AllPosts";
 
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-export default function NewPostForm() {
+export default function NewPostForm({ userId, setUserId }) {
 	const [postTitle, setpostTitle] = useState("");
 	const [postPrice, setpostPrice] = useState("");
 	const [postDelivery, setpostDelivery] = useState(false);
 	const [postDescription, setpostDescription] = useState("");
+
+	const [NPFuserId, setNPFUserId] = useState(userId);
 
 	const [successMessage, setSuccessMessage] = useState(null);
 
@@ -35,16 +38,19 @@ export default function NewPostForm() {
 				},
 				body: JSON.stringify({
 					post: {
-						title: "title",
-						price: "test",
-						description: "test",
+						title: postTitle,
+						price: postPrice,
+						description: postDescription,
 					},
 				}),
 			});
 			console.log("response from NPF: ", response);
 			const result = await response.json();
 			console.log("result from NPF: ", result);
+			setNPFUserId(result.data.post._id);
+			console.log("userId from NPF", result.data.post._id);
 			setSuccessMessage("Post submitted");
+			<AllPosts />;
 			// fetchAllPosts();
 			// return postObj;
 		} catch (err) {
@@ -57,7 +63,7 @@ export default function NewPostForm() {
 			{successMessage && <p>{successMessage}</p>}
 			<form onSubmit={handleSubmit}>
 				<TextField
-					label="Name"
+					label={"Name"}
 					value={postTitle}
 					onChange={(e) => setpostTitle(e.target.value)}
 				/>
