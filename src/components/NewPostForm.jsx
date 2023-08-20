@@ -5,13 +5,13 @@ import AllPosts from "./AllPosts";
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-export default function NewPostForm({ userId, setUserId }) {
+export default function NewPostForm(props) {
 	const [postTitle, setpostTitle] = useState("");
 	const [postPrice, setpostPrice] = useState("");
 	const [postDelivery, setpostDelivery] = useState(false);
 	const [postDescription, setpostDescription] = useState("");
 
-	const [NPFuserId, setNPFUserId] = useState(userId);
+	const [NPFuserId, setNPFUserId] = useState(null);
 
 	const [successMessage, setSuccessMessage] = useState(null);
 
@@ -48,6 +48,9 @@ export default function NewPostForm({ userId, setUserId }) {
 			const result = await response.json();
 			console.log("result from NPF: ", result);
 			setNPFUserId(result.data.post._id);
+
+			// setting data to be sent back up the family tree
+			props.handleCallback(NPFuserId);
 
 			console.log("userId from NPF", result.data.post._id);
 			setSuccessMessage("Post submitted");

@@ -11,11 +11,13 @@ import DeletePost from "./DeletePost";
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-export default function AllPosts({ userId, setUserId }) {
+export default function AllPosts({ userId, setUserId, handleCallback }) {
 	const [posts, setPosts] = useState([]);
 	const [error, setError] = useState(null);
 	const [searchParam, setSearchParam] = useState("");
 	const navigate = useNavigate();
+
+	const [APuserId, setAPuserId] = useState(null);
 
 	const tokenKey =
 		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUyMjgxYmJlYjkzNTAwMTRjNGNiMzAiLCJ1c2VybmFtZSI6ImNhciIsImlhdCI6MTY5MjU0MzAwM30.QajAa_4KC8k0RXbXZpqGG0NK3ElkU8MDWIS6aIbSmsM";
@@ -32,6 +34,16 @@ export default function AllPosts({ userId, setUserId }) {
 		getAllPosts();
 	}, []);
 
+	async function handleDelete(userId) {
+		try {
+			const result = await deletePost(userId);
+			console.log("result from handleDelete", result);
+			navigate("/posts");
+		} catch (error) {
+			console.error("can't delete post", error);
+		}
+	}
+
 	const postsToDisplay = searchParam
 		? posts.filter(
 				(post) =>
@@ -41,24 +53,34 @@ export default function AllPosts({ userId, setUserId }) {
 		: posts;
 
 	// show only posts by logged in user
-	// const postsByUser = searchParam
-	//     ? posts.filter(
-	//         (post) =>
-	//             post.author._id
-	//     )
+	const postsByUser = APuserId
+		? posts.filter((post) => post.author._id.includes(APuserId))
+		: posts;
 
 	// get data from NewPostForm once id of a post is known
+	function CallBackAP(userId) {
+		return <>{userId}</>;
+	}
+	userId ? setAPuserId(userId) : null;
+
+	console.log("i'm userid from AP", userId);
+
+	console.log("i'm APuserId from AP", APuserId);
 
 	return (
 		<div id="all-posts-container">
 			<div id="all-posts-header">
 				<h1>AVAILABLE LISTINGS</h1>
 			</div>
+			{/* <div>
+				<h2>userId is now: {APuserId}</h2>
+			</div> */}
 			<div>
 				<SignUpForm />
 			</div>
 			<div>
-				<NewPostForm userId={userId} setUserId={setUserId} />
+				{/* <NewPostForm userId={userId} setUserId={setUserId} /> */}
+				<NewPostForm handleCallback={CallBackAP} />
 			</div>
 			<div>
 				<label>
@@ -85,7 +107,8 @@ export default function AllPosts({ userId, setUserId }) {
 								<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
 								<p id="post-description">{post.description}</p>
 								<button>Message</button>
-								<DeletePost />
+								<button onClick={handleDelete}>Delete Post</button>
+								{/* <DeletePost userId={APuserId} /> */}
 							</div>
 						</>
 					);

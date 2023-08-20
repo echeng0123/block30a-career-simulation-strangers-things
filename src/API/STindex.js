@@ -15,9 +15,10 @@ export const fetchAllPosts = async () => {
 const tokenKey =
 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUyMjgxYmJlYjkzNTAwMTRjNGNiMzAiLCJ1c2VybmFtZSI6ImNhciIsImlhdCI6MTY5MjU0MzAwM30.QajAa_4KC8k0RXbXZpqGG0NK3ElkU8MDWIS6aIbSmsM";
 
-export async function deletePost(_id) {
+export async function deletePost(userId) {
+	console.log("userId inside deletePost function", userId);
 	try {
-		const response = await fetch(`${API_URL}/posts/${_id}`, {
+		const response = await fetch(`${API_URL}/posts/${userId}`, {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json",
@@ -25,7 +26,7 @@ export async function deletePost(_id) {
 			},
 		});
 		const result = await response.json();
-		console.log("I'm result from deletePost", result);
+		console.log("I'm result from deletePost function", result);
 		return result;
 	} catch (error) {
 		console.error("i'm from deletePost", error);
