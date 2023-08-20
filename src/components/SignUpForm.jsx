@@ -1,12 +1,12 @@
 // This component allows the user to create an account.
 
 import { useState } from "react";
-import { authSliceReducer } from "../redux/authSlice";
 
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
 export default function SignUpForm() {
+	const [token, setToken] = useState(null);
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [successMessage, setSuccessMessage] = useState(null);

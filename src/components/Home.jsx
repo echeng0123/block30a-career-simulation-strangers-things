@@ -8,31 +8,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/authSlice";
 
 function Home() {
-	// console.log("Initial state: ", store.getState());
-	// const [tokenId, setTokenId] = useState(null);
+	// // console.log("Initial state: ", store.getState());
+	// // const [tokenId, setTokenId] = useState(null);
 	const [usernameNew, setUsernameNew] = useState("");
 	const [passwordNew, setPasswordNew] = useState("");
 
-	// Access token from Redux store
-	// const token = useSelector((state) => state.user.token);
-	const username = useSelector((state) => state.user.username);
-	const password = useSelector((state) => state.user.password);
-	// console.log("token in Home", token);
-	const dispatch = useDispatch();
+	// // Access token from Redux store
+	// // const token = useSelector((state) => state.user.token);
+	// const username = useSelector((state) => state.user.username);
+	// const password = useSelector((state) => state.user.password);
+	// // console.log("token in Home", token);
+	// const dispatch = useDispatch();
 
-	// Event handler for the register action
+	// // Event handler for the register action
 	function handleRegister() {
-		dispatch(register({ username: usernameNew, password: passwordNew }));
+		// dispatch(register({ username: usernameNew, password: passwordNew }));
 		// 	// console.log("token", userToken);
-		console.log("pw", password);
-		console.log("username", username);
+		console.log("pw", passwordNew);
+		console.log("username", usernameNew);
 		setPasswordNew("");
 		setUsernameNew("");
 	}
 
 	return (
 		<>
-			<h1>this is home</h1>;
+			<h1>this is home</h1>
 			<div>
 				<h3>Sign Up Form</h3>
 				<div>
