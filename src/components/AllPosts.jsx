@@ -47,6 +47,8 @@ export default function AllPosts({ userId, setUserId }) {
 	//             post.author._id
 	//     )
 
+	// get data from NewPostForm once id of a post is known
+
 	return (
 		<div id="all-posts-container">
 			<div id="all-posts-header">

@@ -48,11 +48,11 @@ export default function NewPostForm({ userId, setUserId }) {
 			const result = await response.json();
 			console.log("result from NPF: ", result);
 			setNPFUserId(result.data.post._id);
+
 			console.log("userId from NPF", result.data.post._id);
 			setSuccessMessage("Post submitted");
-			<AllPosts />;
 			// fetchAllPosts();
-			// return postObj;
+			return NPFuserId;
 		} catch (err) {
 			console.error("Oops, something went wrong with adding that post!", err);
 		}

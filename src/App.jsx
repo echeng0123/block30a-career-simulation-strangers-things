@@ -11,7 +11,7 @@ function App() {
 		<>
 			<div id="app-container">
 				<NavBar userId={userId} setUserId={setUserId} />
-				<p>I am userId {userId} from App</p>
+				<p>I am userId: {userId} from App</p>
 				<MainSection userId={userId} setUserId={setUserId} />
 			</div>
 		</>
