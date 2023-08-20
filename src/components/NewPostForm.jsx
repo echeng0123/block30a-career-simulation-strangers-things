@@ -4,7 +4,7 @@ import { useState } from "react";
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-export default function NewPostForm({ token, setToken }) {
+export default function NewPostForm() {
 	const [postTitle, setpostTitle] = useState("");
 	const [postPrice, setpostPrice] = useState("");
 	const [postDelivery, setpostDelivery] = useState(false);

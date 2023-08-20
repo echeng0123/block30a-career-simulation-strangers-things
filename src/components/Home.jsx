@@ -1,4 +1,4 @@
-import SignUpForm from "./SignUpForm";
+// import SignUpForm from "./SignUpForm";
 import NewPostForm from "./NewPostForm";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
 			<br />
 			{/* <SignUpForm handleCallback={CallBack} /> */}
 			{/* <SignUpForm token={token} setToken={setToken} /> */}
-			<NewPostForm token={token} setToken={setToken} />
+			<NewPostForm />
 		</div>
 	);
 }
