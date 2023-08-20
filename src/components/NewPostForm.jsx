@@ -7,7 +7,6 @@ const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 export default function NewPostForm({ token, setToken }) {
 	const [postTitle, setpostTitle] = useState("");
 	const [postPrice, setpostPrice] = useState("");
-	const [postLocation, setpostLocation] = useState("");
 	const [postDelivery, setpostDelivery] = useState(false);
 	const [postDescription, setpostDescription] = useState("");
 
@@ -15,23 +14,32 @@ export default function NewPostForm({ token, setToken }) {
 
 	async function handleSubmit(event) {
 		event.preventDefault();
-		let postData = {
-			title: postTitle,
-			price: postPrice,
-			location: postLocation,
-			willDeliver: postDelivery,
-			description: postDescription,
-		};
-		console.log("postData", postData);
+		// let postData = {
+		// 	title: "title",
+		// 	price: "test",
+		// 	description: "test",
+		// };
+		// console.log("postData", postData);
+		// const postDataJson = JSON.stringify(postData);
+		// console.log("stringified postData", postDataJson);
+
+		const tokenKey =
+			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUyMjgxYmJlYjkzNTAwMTRjNGNiMzAiLCJ1c2VybmFtZSI6ImNhciIsImlhdCI6MTY5MjU0MzAwM30.QajAa_4KC8k0RXbXZpqGG0NK3ElkU8MDWIS6aIbSmsM";
 
 		try {
 			const response = await fetch(`${API_URL}/posts`, {
 				method: "POST",
-				body: JSON.stringify(postData),
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${token}`,
+					Authorization: `Bearer ${tokenKey}`,
 				},
+				body: JSON.stringify({
+					post: {
+						title: "title",
+						price: "test",
+						description: "test",
+					},
+				}),
 			});
 			console.log("response from NPF: ", response);
 			const result = await response.json();
@@ -57,11 +65,6 @@ export default function NewPostForm({ token, setToken }) {
 					label="Price"
 					value={postPrice}
 					onChange={(e) => setpostPrice(e.target.value)}
-				/>
-				<TextField
-					label="Location"
-					value={postLocation}
-					onChange={(e) => setpostLocation(e.target.value)}
 				/>
 				<TextField
 					label="Delivery Available"

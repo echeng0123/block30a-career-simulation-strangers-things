@@ -15,7 +15,7 @@ export default function Home() {
 			<h1>parent to child</h1>
 			<br />
 			{/* <SignUpForm handleCallback={CallBack} /> */}
-			<SignUpForm token={token} setToken={setToken} />
+			{/* <SignUpForm token={token} setToken={setToken} /> */}
 			<NewPostForm token={token} setToken={setToken} />
 		</div>
 	);

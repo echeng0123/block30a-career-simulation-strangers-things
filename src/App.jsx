@@ -5,7 +5,6 @@ import NavBar from "./components/NavBar";
 
 function App() {
 	const [token, setToken] = useState(null);
-
 	return (
 		<>
 			<div id="app-container">

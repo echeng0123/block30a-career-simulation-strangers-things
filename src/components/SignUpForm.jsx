@@ -22,6 +22,9 @@ export default function SignUpForm({ token, setToken }) {
 	async function handleSubmit(event) {
 		event.preventDefault();
 		// console.log("userObj is ", userObj);
+
+		// const tokenKey =
+
 		try {
 			if ({ username }.username.length >= 3) {
 				const response = await fetch(`${API_URL}/users/register`, {
