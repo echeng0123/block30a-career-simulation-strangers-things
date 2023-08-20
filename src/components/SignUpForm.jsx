@@ -8,51 +8,12 @@ import { deposit } from "../redux/authSlice";
 // const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
 export default function SignUpForm() {
-	// const [token, setToken] = useState(null);
-	// const [username, setUsername] = useState("");
-	// const [password, setPassword] = useState("");
-	// const [successMessage, setSuccessMessage] = useState(null);
-	// const [error, setError] = useState(null);
-
-	// const userObj = {
-	// 	user: {
-	// 		username: username,
-	// 		password: password,
-	// 	},
-	// };
-
-	// async function handleSubmit(event) {
-	// 	event.preventDefault();
-	// 	// console.log("userObj is ", userObj);
-	// 	try {
-	// 		if ({ username }.username.length >= 3) {
-	// 			const response = await fetch(`${API_URL}/users/register`, {
-	// 				method: "POST",
-	// 				body: JSON.stringify(userObj),
-	// 				headers: { "content-type": "application/json" },
-	// 			});
-	// 			const result = await response.json();
-	// 			setToken(result.data.token);
-	// 			console.log("result from signing up ", result);
-	// 			console.log("result.data.token is now: ", result.data.token);
-
-	// 			setSuccessMessage("Sign up successful");
-	// 		} else {
-	// 			alert("Username too short. Please enter at least 3 characters.");
-	// 			setUsername("");
-	// 			setPassword("");
-	// 			setToken("");
-	// 		}
-	// 	} catch (error) {
-	// 		setError(error.message);
-	// 	}
-	// }
-
 	// state variables for input fields
 	const [depositAmount, setDepositAmount] = useState(0);
 
 	// access balance from redux store
 	const balance = useSelector((state) => state.account.balance);
+	console.log("initial balance is ", balance);
 	const dispatch = useDispatch();
 
 	// Event handler for deposit action
@@ -107,3 +68,43 @@ export default function SignUpForm() {
 		</>
 	);
 }
+
+// const [token, setToken] = useState(null);
+// const [username, setUsername] = useState("");
+// const [password, setPassword] = useState("");
+// const [successMessage, setSuccessMessage] = useState(null);
+// const [error, setError] = useState(null);
+
+// const userObj = {
+// 	user: {
+// 		username: username,
+// 		password: password,
+// 	},
+// };
+
+// async function handleSubmit(event) {
+// 	event.preventDefault();
+// 	// console.log("userObj is ", userObj);
+// 	try {
+// 		if ({ username }.username.length >= 3) {
+// 			const response = await fetch(`${API_URL}/users/register`, {
+// 				method: "POST",
+// 				body: JSON.stringify(userObj),
+// 				headers: { "content-type": "application/json" },
+// 			});
+// 			const result = await response.json();
+// 			setToken(result.data.token);
+// 			console.log("result from signing up ", result);
+// 			console.log("result.data.token is now: ", result.data.token);
+
+// 			setSuccessMessage("Sign up successful");
+// 		} else {
+// 			alert("Username too short. Please enter at least 3 characters.");
+// 			setUsername("");
+// 			setPassword("");
+// 			setToken("");
+// 		}
+// 	} catch (error) {
+// 		setError(error.message);
+// 	}
+// }
