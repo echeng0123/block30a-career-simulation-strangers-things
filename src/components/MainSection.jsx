@@ -8,18 +8,12 @@ import Messages from "./Messages";
 import Home from "./Home";
 // import SignUpForm from "./SignUpForm";
 
-export default function MainSection({ token, setToken }) {
+export default function MainSection() {
 	return (
 		<div id="main-section">
 			<Routes>
-				<Route
-					path="/home"
-					element={<Home token={token} setToken={setToken} />}
-				/>
-				<Route
-					path="/posts"
-					element={<AllPosts token={token} setToken={setToken} />}
-				/>
+				<Route path="/home" element={<Home />} />
+				<Route path="/posts" element={<AllPosts />} />
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/messages" element={<Messages />} />
 				{/* <Route path="/login" element={<Login />} /> */}

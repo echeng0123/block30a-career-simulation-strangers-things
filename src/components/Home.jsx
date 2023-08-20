@@ -1,5 +1,5 @@
 import SignUpForm from "./SignUpForm";
-import NewPostForm from "./NewPostForm";
+// import NewPostForm from "./NewPostForm";
 
 export default function Home() {
 	// function CallBack(token) {
@@ -12,11 +12,11 @@ export default function Home() {
 
 	return (
 		<div>
-			<h1>parent to child</h1>
+			<h1>homepage test</h1>
 			<br />
 			{/* <SignUpForm handleCallback={CallBack} /> */}
-			<SignUpForm token={token} setToken={setToken} />
-			<NewPostForm token={token} setToken={setToken} />
+			<SignUpForm />
+			{/* <NewPostForm /> */}
 		</div>
 	);
 }

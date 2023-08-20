@@ -1,38 +1,53 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// const initialState = {
+// 	// Initial token & user are both empty (not logged in)
+// 	// token: null,
+// 	username: "",
+// 	password: "",
+// 	users: [],
+// };
+
 const initialState = {
-	// Initial token & user are both empty (not logged in)
-	// token: null,
-	username: "",
-	password: "",
-	users: [],
+	balance: 0,
 };
 
+// const authSlice = createSlice({
+// 	name: "user",
+// 	initialState,
+// 	reducers: {
+// 		register: (state, action) => {
+// 			const { guestName, guestPassword } = action.payload;
+// 			state.username = guestName;
+// 			state.password = guestPassword;
+// 			// state.token = userToken;
+// 			state.users.push({
+// 				action: "Register",
+// 				// guestName,
+// 				// guestPassword,
+// 				username: state.username,
+// 				password: state.password,
+// 				// userToken,
+// 				// token: state.token,
+// 			});
+// 		},
+// 	},
+// 	// extraReducers: {},
+// });
+
 const authSlice = createSlice({
-	name: "user",
+	name: "account",
 	initialState,
 	reducers: {
-		register: (state, action) => {
-			const { guestName, guestPassword } = action.payload;
-			state.username = guestName;
-			state.password = guestPassword;
-			// state.token = userToken;
-			state.users.push({
-				action: "Register",
-				// guestName,
-				// guestPassword,
-				username: state.username,
-				password: state.password,
-				// userToken,
-				// token: state.token,
-			});
+		deposit: (state, action) => {
+			const { amount } = action.paylodad;
+			state.balance += amount;
 		},
 	},
-	// extraReducers: {},
 });
 
 // Exporting actions from the authSlice
-export const { register } = authSlice.actions;
+export const { deposit } = authSlice.actions;
 
 // Export the reducer as the default export
 export default authSlice.reducer;
