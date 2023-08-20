@@ -34,3 +34,31 @@ export const fetchAllPosts = async () => {
 // 		console.error(error);
 // 	}
 // }
+
+export async function createPost(
+	title,
+	description,
+	price,
+	location,
+	willDeliver
+) {
+	try {
+		const response = await fetch(`${API_URL}/posts`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				title,
+				description,
+				price,
+				location,
+				willDeliver,
+			}),
+		});
+		const result = await response.json();
+		return result;
+	} catch (error) {
+		console.error(error);
+	}
+}
