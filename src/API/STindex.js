@@ -52,15 +52,7 @@ export async function deletePost(postIdB, tokenB) {
 	}
 }
 
-export async function editPost(
-	newTitle,
-	newDescription,
-	newPrice,
-	newLocation,
-	newDelivery,
-	postIdAP,
-	tokenA
-) {
+export async function editPost(postObj, postIdAP, tokenA) {
 	console.log("entering edit post");
 
 	try {
@@ -70,50 +62,40 @@ export async function editPost(
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${tokenA}`,
 			},
-			body: {
-				post: {
-					title: newTitle,
-					description: newDescription,
-					price: newPrice,
-					location: newLocation,
-					willDeliver: newDelivery,
-				},
-			},
+			body: postObj,
 		});
 		const result = await response.json();
-		console.log("result from edit", result);
+		console.log("result from edit post", result);
 		return result;
 	} catch (error) {
 		console.error(error);
 	}
 }
 
-export async function handleEdit(
-	event,
-	newTitle,
-	newDescription,
-	newPrice,
-	newLocation,
-	newDelivery,
-	postIdAP,
-	tokenA
-) {
-	console.log("entering handleEdit in edit post");
-	event.preventDefault();
+// export async function handleEditClick(
+// 	event,
+// 	newTitle,
+// 	newDescription,
+// 	newPrice,
+// 	newLocation,
+// 	newDelivery,
+// 	postIdAP,
+// 	tokenA
+// ) {
+// 	console.log("entering handleEdit in edit post");
 
-	try {
-		const result = await editPost(
-			newTitle,
-			newDescription,
-			newPrice,
-			newLocation,
-			newDelivery,
-			postIdAP,
-			tokenA
-		);
-		console.log(result);
-		// navigate("/posts");
-	} catch (error) {
-		console.error(error);
-	}
-}
+// 	try {
+// 		const result = await editPost(
+// 			newTitle,
+// 			newDescription,
+// 			newPrice,
+// 			newLocation,
+// 			newDelivery,
+// 			postIdAP,
+// 			tokenA
+// 		);
+// 		console.log(result);
+// 	} catch (error) {
+// 		console.error(error);
+// 	}
+// }

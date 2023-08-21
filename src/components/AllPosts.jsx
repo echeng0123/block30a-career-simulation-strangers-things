@@ -31,29 +31,18 @@ export default function AllPosts() {
 		getAllPosts();
 	}, []);
 
-	async function handleDelete(event, postIdAP) {
-		console.log("entering handleDelete in AP");
-		event.preventDefault();
+	// async function handleDelete(event, postIdAP) {
+	// 	console.log("entering handleDelete in AP");
+	// 	event.preventDefault();
 
-		try {
-			const result = await deletePost(postIdAP, tokenA);
-			console.log(result);
-			navigate("/posts");
-		} catch (error) {
-			console.error(error);
-		}
-	}
-
-	async function handleEditClick(event) {
-		console.log("entering handle edit click");
-		event.preventDefault();
-
-		try {
-			<EditPost />;
-		} catch (err) {
-			console.error("can't edit post", err);
-		}
-	}
+	// 	try {
+	// 		const result = await deletePost(postIdAP, tokenA);
+	// 		console.log(result);
+	// 		navigate("/posts");
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 	}
+	// }
 
 	const postsToDisplay = searchParam
 		? posts.filter(
@@ -104,7 +93,7 @@ export default function AllPosts() {
 								>
 									Delete Post
 								</button> */}
-								<button onClick={handleEditClick}>Edit Post</button>
+								<EditPost postId={postIdAP} />
 							</div>
 						</>
 					);

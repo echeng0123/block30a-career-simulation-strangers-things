@@ -4,9 +4,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { editPost } from "../API/STindex";
 import { TextField } from "@mui/material";
-import { handleEdit } from "../API/STindex";
 
-export default function EditPost() {
+export default function EditPost(postIdAP) {
 	console.log("you've entered Edit Post component");
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +14,7 @@ export default function EditPost() {
 	const [newPrice, setNewPrice] = useState("");
 	const [newLocation, setNewLocation] = useState("");
 	const [newDelivery, setNewDelivery] = useState(false);
+	const [postIdEP, setPostIdEP] = useState(postIdAP);
 
 	// access current state from redux store
 	const userA = useSelector((state) => state.user.user);
@@ -22,15 +22,40 @@ export default function EditPost() {
 
 	function handleClick() {
 		setIsOpen(!isOpen);
-		handleEdit();
+	}
+
+	async function handleEdit(event, postIdEP) {
+		console.log("entering handle edit click");
+		event.preventDefault();
+
+		let postObj = JSON.stringify({
+			post: {
+				title: newTitle,
+				description: newDescription,
+				price: newPrice,
+				location: newLocation,
+				willDeliver: newDelivery,
+			},
+		});
+
+		console.log("postObj", postObj);
+
+		try {
+			editPost(postObj, postIdEP, tokenA);
+		} catch (err) {
+			console.error("can't edit post", err);
+		}
 	}
 
 	return (
 		<div>
-			<button onClick={handleClick}>See Details</button>
+			<button onClick={handleClick}>Edit Post</button>
 			{isOpen && (
 				<div>
-					<form onSubmit={handleEdit} id="new-post-form-container">
+					<form
+						onSubmit={(event) => handleEdit(event)}
+						id="new-post-form-container"
+					>
 						<TextField
 							label="Name"
 							value={newTitle}
@@ -56,7 +81,7 @@ export default function EditPost() {
 							value={newDescription}
 							onChange={(e) => setNewDescription(e.target.value)}
 						/>
-						<button type="submit">Submit</button>
+						<button type="submit">Submit Updates</button>
 					</form>
 				</div>
 			)}
