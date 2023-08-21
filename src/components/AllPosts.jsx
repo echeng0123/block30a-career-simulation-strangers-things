@@ -35,9 +35,7 @@ export default function AllPosts({ token, setToken }) {
 			<div id="all-posts-header">
 				<h1>AVAILABLE LISTINGS</h1>
 			</div>
-			<div>
-				<SignUpForm token={token} setToken={setToken} />
-			</div>
+
 			<div>
 				<NewPostForm token={token} setToken={setToken} />
 			</div>
