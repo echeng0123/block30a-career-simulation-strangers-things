@@ -51,3 +51,69 @@ export async function deletePost(postIdB, tokenB) {
 		console.error(error);
 	}
 }
+
+export async function editPost(
+	newTitle,
+	newDescription,
+	newPrice,
+	newLocation,
+	newDelivery,
+	postIdAP,
+	tokenA
+) {
+	console.log("entering edit post");
+
+	try {
+		const response = await fetch(`${API_URL}/posts/${postIdAP}`, {
+			method: "PATCH",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${tokenA}`,
+			},
+			body: {
+				post: {
+					title: newTitle,
+					description: newDescription,
+					price: newPrice,
+					location: newLocation,
+					willDeliver: newDelivery,
+				},
+			},
+		});
+		const result = await response.json();
+		console.log("result from edit", result);
+		return result;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+export async function handleEdit(
+	event,
+	newTitle,
+	newDescription,
+	newPrice,
+	newLocation,
+	newDelivery,
+	postIdAP,
+	tokenA
+) {
+	console.log("entering handleEdit in edit post");
+	event.preventDefault();
+
+	try {
+		const result = await editPost(
+			newTitle,
+			newDescription,
+			newPrice,
+			newLocation,
+			newDelivery,
+			postIdAP,
+			tokenA
+		);
+		console.log(result);
+		// navigate("/posts");
+	} catch (error) {
+		console.error(error);
+	}
+}

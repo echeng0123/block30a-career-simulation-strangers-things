@@ -6,6 +6,7 @@ import NewPostForm from "./NewPostForm";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { deletePost } from "../API/STindex";
+import EditPost from "./EditPost";
 
 export default function AllPosts() {
 	const [posts, setPosts] = useState([]);
@@ -31,7 +32,7 @@ export default function AllPosts() {
 	}, []);
 
 	async function handleDelete(event, postIdAP) {
-		console.log("entering handleDelete in AP", handleDelete);
+		console.log("entering handleDelete in AP");
 		event.preventDefault();
 
 		try {
@@ -40,6 +41,17 @@ export default function AllPosts() {
 			navigate("/posts");
 		} catch (error) {
 			console.error(error);
+		}
+	}
+
+	async function handleEditClick(event) {
+		console.log("entering handle edit click");
+		event.preventDefault();
+
+		try {
+			<EditPost />;
+		} catch (err) {
+			console.error("can't edit post", err);
 		}
 	}
 
@@ -87,11 +99,12 @@ export default function AllPosts() {
 								<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
 								<p id="post-description">{post.description}</p>
 								<p>postId is {post._id}</p>
-								<button
+								{/* <button
 									onSubmit={(event, postIdAP) => handleDelete(event, postIdAP)}
 								>
 									Delete Post
-								</button>
+								</button> */}
+								<button onClick={handleEditClick}>Edit Post</button>
 							</div>
 						</>
 					);
