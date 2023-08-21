@@ -16,7 +16,7 @@ export default function Login({ token, setToken }) {
 	async function handleClick() {
 		// console.log("entered username", enterUsername);
 		// console.log("entered password", enterPassword);
-		console.log("token", token);
+		console.log("token in HC", token);
 		try {
 			const response = await fetch(`${API_URL}/users/login`, {
 				method: "POST",
