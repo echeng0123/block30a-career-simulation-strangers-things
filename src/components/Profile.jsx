@@ -1,5 +1,5 @@
 // This component renders the logged in user profile.
-import { fetchUserProfile } from "../API/STindex";
+import { fetchAllPosts, fetchUserProfile } from "../API/STindex";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { deletePost } from "../API/STindex";
@@ -80,26 +80,34 @@ export default function Profile() {
 			</div>
 			<div id="all-posts-gallery">
 				{error && <p>{error}</p>}
-				{userPostsToDisplay.map((post) => {
+				{userPosts.map((post) => {
 					const postIdA = post._id;
-					return (
-						<>
-							<div id="each-post">
-								<h3>{post.title}</h3>
-								<h5>Seller: {post.author.username}</h5>
-								<h5 id="post-price">Price: {post.price}</h5>
-								<h5>Location: {post.location}</h5>
-								<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
-								<p id="post-description">{post.description}</p>
-								<p>postid is {postIdA}</p>
-								<button
-									onSubmit={(event, postIdA) => handleDelete(event, postIdA)}
-								>
-									Delete Post
-								</button>
+					if (post.author == userId) {
+						return (
+							<>
+								<div id="each-post">
+									<h3>{post.title}</h3>
+									<h5>Seller: {post.author.username}</h5>
+									<h5 id="post-price">Price: {post.price}</h5>
+									<h5>Location: {post.location}</h5>
+									<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
+									<p id="post-description">{post.description}</p>
+									<p>postid is {postIdA}</p>
+									<button
+										onSubmit={(event, postIdA) => handleDelete(event, postIdA)}
+									>
+										Delete Post
+									</button>
+								</div>
+							</>
+						);
+					} else {
+						return (
+							<div>
+								<h1>You have no active posts.</h1>
 							</div>
-						</>
-					);
+						);
+					}
 				})}
 			</div>
 		</>

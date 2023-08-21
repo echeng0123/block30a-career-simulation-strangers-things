@@ -18,29 +18,23 @@ export default function NewPostForm() {
 	// access current state from redux store
 	// const userC = useSelector((state) => state.user.user);
 	const tokenC = useSelector((state) => state.user.token);
-	console.log("token C is", tokenC);
 
 	async function handleSubmit(event) {
 		event.preventDefault();
-		// let postData = {
-		// 	title: postTitle,
-		// 	price: postPrice,
-		// 	location: postLocation,
-		// 	willDeliver: postDelivery,
-		// 	description: postDescription,
-		// };
-		// console.log("postData", postData);
+		let postData = {
+			post: {
+				title: postTitle,
+				price: postPrice,
+				location: postLocation,
+				willDeliver: postDelivery,
+				description: postDescription,
+			},
+		};
 
 		try {
 			const response = await fetch(`${API_URL}/posts`, {
 				method: "POST",
-				body: JSON.stringify({
-					post: {
-						title: `${postTitle}`,
-						price: `${postPrice}`,
-						description: `${postDescription}`,
-					},
-				}),
+				body: JSON.stringify(postData),
 				headers: {
 					"Content-Type": "application/json",
 					Authorization: `Bearer ${tokenC}`,
@@ -50,7 +44,7 @@ export default function NewPostForm() {
 			const result = await response.json();
 			console.log("result from NPF: ", result);
 			setSuccessMessage("Post submitted");
-			// fetchAllPosts();
+			fetchAllPosts();
 		} catch (err) {
 			console.error("Oops, something went wrong with adding that post!", err);
 		}

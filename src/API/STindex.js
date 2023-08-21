@@ -5,7 +5,6 @@ export const fetchAllPosts = async () => {
 	try {
 		const response = await fetch(`${API_URL}/posts`);
 		const posts = await response.json();
-		// const allPosts = posts.data.posts;
 		return posts;
 	} catch (error) {
 		console.error("Cannot fetch all players", error);
@@ -22,11 +21,10 @@ export const fetchUserProfile = async (token) => {
 			},
 		});
 		const result = await response.json();
-		console.log("result from fetchuserprofile", result);
 		if (result.success) {
 			console.log(`User ${result.data.username} is here`);
 		} else {
-			// alert("can't get user profile");
+			alert("can't get user profile");
 			console.log(result.message);
 		}
 		return result;
