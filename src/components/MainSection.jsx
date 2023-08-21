@@ -5,38 +5,29 @@ import { useState } from "react";
 import AllPosts from "./AllPosts";
 import Profile from "./Profile";
 import Messages from "./Messages";
-// import Login from "./Login";
+import Login from "./Login";
 import Home from "./Home";
-// import SignUpForm from "./SignUpForm";
 
-export default function MainSection({ userId, setUserId }) {
-	// get data from AllPosts once id of a post is known
-	function CallBackMS(userId) {
-		console.log("i'm userid from callbackMS", userId);
-		return <>{setUserId(userId)}</>;
-
-		// <div>
-		// 	<p>from NPF: {userId}</p>
-		// </div>
-	}
+export default function MainSection() {
+	const [token, setToken] = useState(null); // tracking user id through props for all components
 
 	return (
 		<div id="main-section">
 			<Routes>
-				<Route path="/home" element={<Home />} />
+				<Route
+					path="/home"
+					element={<Home token={token} setToken={setToken} />}
+				/>
 				<Route
 					path="/posts"
-					element={
-						<AllPosts
-							userId={userId}
-							setUserId={setUserId}
-							handleCallback={CallBackMS}
-						/>
-					}
+					element={<AllPosts token={token} setToken={setToken} />}
 				/>
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/messages" element={<Messages />} />
-				{/* <Route path="/login" element={<Login />} /> */}
+				<Route
+					path="/login"
+					element={<Login token={token} setToken={setToken} />}
+				/>
 				{/* conditionally render login component text */}
 			</Routes>
 		</div>

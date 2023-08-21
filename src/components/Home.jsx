@@ -1,22 +1,14 @@
-// import SignUpForm from "./SignUpForm";
-import NewPostForm from "./NewPostForm";
+import SignUpForm from "./SignUpForm";
+import Login from "./Login";
 
-export default function Home() {
-	// function CallBack(token) {
-	// 	return (
-	// 		<div>
-	// 			<p>token from sign up form: {token}</p>
-	// 		</div>
-	// 	);
-	// }
-
+export default function Home({ token, setToken }) {
 	return (
 		<div>
-			<h1>parent to child</h1>
-			<br />
-			{/* <SignUpForm handleCallback={CallBack} /> */}
-			{/* <SignUpForm token={token} setToken={setToken} /> */}
-			<NewPostForm />
+			<h1>homepage here</h1>
+			<h2>login here</h2>
+			<Login token={token} setToken={setToken} />
+			<h2>sign in here</h2>
+			<SignUpForm token={token} setToken={setToken} />
 		</div>
 	);
 }

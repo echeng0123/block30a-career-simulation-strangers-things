@@ -11,16 +11,11 @@ import DeletePost from "./DeletePost";
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-export default function AllPosts({ userId, setUserId, handleCallback }) {
+export default function AllPosts({ token, setToken }) {
 	const [posts, setPosts] = useState([]);
 	const [error, setError] = useState(null);
 	const [searchParam, setSearchParam] = useState("");
 	const navigate = useNavigate();
-
-	const [APuserId, setAPuserId] = useState(null);
-
-	const tokenKey =
-		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUyMjgxYmJlYjkzNTAwMTRjNGNiMzAiLCJ1c2VybmFtZSI6ImNhciIsImlhdCI6MTY5MjU0MzAwM30.QajAa_4KC8k0RXbXZpqGG0NK3ElkU8MDWIS6aIbSmsM";
 
 	useEffect(() => {
 		async function getAllPosts() {
@@ -53,34 +48,14 @@ export default function AllPosts({ userId, setUserId, handleCallback }) {
 		: posts;
 
 	// show only posts by logged in user
-	const postsByUser = APuserId
-		? posts.filter((post) => post.author._id.includes(APuserId))
-		: posts;
-
-	// get data from NewPostForm once id of a post is known
-	function CallBackAP(userId) {
-		return <>{userId}</>;
-	}
-	userId ? setAPuserId(userId) : null;
-
-	console.log("i'm userid from AP", userId);
-
-	console.log("i'm APuserId from AP", APuserId);
 
 	return (
 		<div id="all-posts-container">
 			<div id="all-posts-header">
 				<h1>AVAILABLE LISTINGS</h1>
 			</div>
-			{/* <div>
-				<h2>userId is now: {APuserId}</h2>
-			</div> */}
 			<div>
-				<SignUpForm />
-			</div>
-			<div>
-				{/* <NewPostForm userId={userId} setUserId={setUserId} /> */}
-				<NewPostForm handleCallback={CallBackAP} />
+				<NewPostForm token={token} setToken={setToken} />
 			</div>
 			<div>
 				<label>

@@ -23,8 +23,6 @@ export default function SignUpForm({ token, setToken }) {
 		event.preventDefault();
 		// console.log("userObj is ", userObj);
 
-		// const tokenKey =
-
 		try {
 			if ({ username }.username.length >= 3) {
 				const response = await fetch(`${API_URL}/users/register`, {
@@ -33,10 +31,11 @@ export default function SignUpForm({ token, setToken }) {
 					headers: { "content-type": "application/json" },
 				});
 				const result = await response.json();
-				setToken(result.data.token);
 				console.log("result from signing up ", result);
-				console.log("result.data.token is now: ", result.data.token);
-
+				// console.log("result.data.token is now: ", result.data.token);
+				setToken(result.data.token);
+				setUsername(username);
+				setPassword(password);
 				setSuccessMessage("Sign up successful");
 			} else {
 				alert("Username too short. Please enter at least 3 characters.");
@@ -75,7 +74,6 @@ export default function SignUpForm({ token, setToken }) {
 				<br></br>
 				<button>Submit</button>
 			</form>
-			{/* {props.handleCallback(token)} */}
 		</>
 	);
 }
