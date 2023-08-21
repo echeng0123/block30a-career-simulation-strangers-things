@@ -3,18 +3,19 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { editPost } from "../API/STindex";
-import { TextField } from "@mui/material";
+import { TextField, InputLabel, Select, MenuItem } from "@mui/material";
 
-export default function EditPost(postIdAP) {
-	console.log("you've entered Edit Post component");
-
+export default function EditPost(postId) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [newTitle, setNewTitle] = useState("");
 	const [newDescription, setNewDescription] = useState("");
 	const [newPrice, setNewPrice] = useState("");
 	const [newLocation, setNewLocation] = useState("");
 	const [newDelivery, setNewDelivery] = useState(false);
-	const [postIdEP, setPostIdEP] = useState(postIdAP);
+
+	console.log("postId inside Edit Post component: ", postId);
+	const postIdEP = postId.postId;
+	console.log("postIdEP inside Edit Post: ", postIdEP);
 
 	// access current state from redux store
 	const userA = useSelector((state) => state.user.user);
@@ -24,8 +25,13 @@ export default function EditPost(postIdAP) {
 		setIsOpen(!isOpen);
 	}
 
-	async function handleEdit(event, postIdEP) {
+	const handleChange = (event) => {
+		setNewDelivery(event.target.value);
+	};
+
+	async function handleEdit(event) {
 		console.log("entering handle edit click");
+		console.log("postIdEP inside handleEdit function: ", postIdEP);
 		event.preventDefault();
 
 		let postObj = JSON.stringify({
@@ -71,11 +77,19 @@ export default function EditPost(postIdAP) {
 							value={newLocation}
 							onChange={(e) => setNewLocation(e.target.value)}
 						/>
-						<TextField
-							label="Delivery Available"
+						<InputLabel id="simple-select-label">
+							Delivery Available?
+						</InputLabel>
+						<Select
+							labelId="simple-select-label"
+							id="simple-select"
 							value={newDelivery}
-							onChange={(e) => setNewDelivery(e.target.value)}
-						/>
+							label="delivery"
+							onChange={handleChange}
+						>
+							<MenuItem value={false}>No</MenuItem>
+							<MenuItem value={true}>Yes</MenuItem>
+						</Select>
 						<TextField
 							label="Description"
 							value={newDescription}

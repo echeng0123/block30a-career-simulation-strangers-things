@@ -52,11 +52,14 @@ export async function deletePost(postIdB, tokenB) {
 	}
 }
 
-export async function editPost(postObj, postIdAP, tokenA) {
+export async function editPost(postObj, postIdEP, tokenA) {
 	console.log("entering edit post");
+	console.log("postObj inside EP: ", postObj);
+	console.log("postIdEP inside EP: ", postIdEP);
+	console.log("tokenA inside EP: ", tokenA);
 
 	try {
-		const response = await fetch(`${API_URL}/posts/${postIdAP}`, {
+		const response = await fetch(`${API_URL}/posts/${postIdEP}`, {
 			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",
