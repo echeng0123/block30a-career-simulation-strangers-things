@@ -20,22 +20,14 @@ export default function Login() {
 
 	const navigate = useNavigate();
 
-	// access balance from redux store
-	// const userA = useSelector((state) => state);
-	// const tokenA = useSelector((state) => state);
-
-	// console.log("userA", userA);
-	// console.log("tokenA", tokenA);
-
 	// get current userInfo from redux store
 	const dispatch = useDispatch();
 
 	// event handler for login action
 	async function handleClick(event) {
 		event.preventDefault();
-		console.log("entered handleClick");
+
 		try {
-			console.log("you've entered the try");
 			const response = await fetch(`${API_URL}/users/login`, {
 				method: "POST",
 				headers: {
@@ -49,7 +41,6 @@ export default function Login() {
 				}),
 			});
 			const result = await response.json();
-			console.log("result from Login ", result);
 			dispatch(
 				register({
 					user: enterUsername,
@@ -57,11 +48,12 @@ export default function Login() {
 				})
 			);
 			if (result.success) {
+				alert("You've successfully logged in");
 				setSuccessMessage("Successfully logged in");
 				navigate(`/profile`);
 			}
 		} catch (error) {
-			// alert("Unable to login");
+			alert("Unable to login");
 			console.error("Problems logging in ", error);
 			setError(error);
 		}

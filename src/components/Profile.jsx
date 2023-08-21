@@ -1,6 +1,9 @@
 // This component renders the logged in user profile.
 import { fetchUserProfile } from "../API/STindex";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { deletePost } from "../API/STindex";
+import { useSelector } from "react-redux";
 
 export default function Profile() {
 	const [userPosts, setUserPosts] = useState([]);
@@ -9,21 +12,45 @@ export default function Profile() {
 	const [error, setError] = useState(null);
 	const [searchParam, setSearchParam] = useState("");
 
-	// pull user profile details with hardcoded token
+	const navigate = useNavigate();
+
+	// access current state from redux store
+	const userA = useSelector((state) => state.user.user);
+	const tokenA = useSelector((state) => state.user.token);
+
+	console.log("tokenA from profile", tokenA);
 
 	useEffect(() => {
 		async function getUserProfile() {
-			const response = await fetchUserProfile();
+			const response = await fetchUserProfile(tokenA);
 			if (response.success) {
 				setUserPosts(response.data.posts);
 				setProfileUsername(response.data.username);
 				setUserId(response.data._id);
 			} else {
 				setError(response.error);
+				navigate("/posts");
 			}
 		}
 		getUserProfile();
 	}, []);
+
+	async function handleDelete(event, postIdA) {
+		event.preventDefault();
+		console.log("entering handledelete");
+
+		const postIdB = postIdA;
+		const tokenB = tokenA;
+		console.log("postIdB is", postIdB);
+
+		try {
+			const result = await deletePost(postIdB, tokenB);
+			console.log("result from handle delete", result);
+			// navigate("/profile");
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
 	const userPostsToDisplay = searchParam
 		? userPosts.filter(
@@ -54,6 +81,7 @@ export default function Profile() {
 			<div id="all-posts-gallery">
 				{error && <p>{error}</p>}
 				{userPostsToDisplay.map((post) => {
+					const postIdA = post._id;
 					return (
 						<>
 							<div id="each-post">
@@ -63,7 +91,12 @@ export default function Profile() {
 								<h5>Location: {post.location}</h5>
 								<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
 								<p id="post-description">{post.description}</p>
-								<button>Message</button>
+								<p>postid is {postIdA}</p>
+								<button
+									onSubmit={(event, postIdA) => handleDelete(event, postIdA)}
+								>
+									Delete Post
+								</button>
 							</div>
 						</>
 					);

@@ -1,7 +1,7 @@
 // This component is the navigation bar for the site
 import { Link } from "react-router-dom";
 
-export default function NavBar({ token, setToken }) {
+export default function NavBar() {
 	return (
 		<div id="navbar-container">
 			<h1 id="site-header">Strangers Things</h1>

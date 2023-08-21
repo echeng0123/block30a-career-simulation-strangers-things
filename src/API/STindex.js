@@ -1,10 +1,6 @@
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-// hardcoding a token in
-const token =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUyMjgxYmJlYjkzNTAwMTRjNGNiMzAiLCJ1c2VybmFtZSI6ImNhciIsImlhdCI6MTY5MjU0MzAwM30.QajAa_4KC8k0RXbXZpqGG0NK3ElkU8MDWIS6aIbSmsM";
-
 export const fetchAllPosts = async () => {
 	try {
 		const response = await fetch(`${API_URL}/posts`);
@@ -16,7 +12,7 @@ export const fetchAllPosts = async () => {
 	}
 };
 
-export const fetchUserProfile = async () => {
+export const fetchUserProfile = async (token) => {
 	try {
 		const response = await fetch(`${API_URL}/users/me`, {
 			method: "GET",
@@ -26,11 +22,11 @@ export const fetchUserProfile = async () => {
 			},
 		});
 		const result = await response.json();
-		console.log("result is", result);
+		console.log("result from fetchuserprofile", result);
 		if (result.success) {
 			console.log(`User ${result.data.username} is here`);
 		} else {
-			alert("can't get user profile");
+			// alert("can't get user profile");
 			console.log(result.message);
 		}
 		return result;
@@ -39,14 +35,21 @@ export const fetchUserProfile = async () => {
 	}
 };
 
-// export async function deletePost(id) {
-// 	try {
-// 		const response = await fetch(`${API_URL}/posts/${id}`, {
-// 			method: "DELETE",
-// 		});
-// 		const result = await response.json();
-// 		return result;
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// }
+export async function deletePost(postIdB, tokenB) {
+	console.log("entering delete");
+
+	try {
+		const response = await fetch(`${API_URL}/posts/${postIdB}`, {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${tokenB}`,
+			},
+		});
+		const result = await response.json();
+		console.log("result from delete", result);
+		return result;
+	} catch (error) {
+		console.error(error);
+	}
+}

@@ -1,5 +1,7 @@
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { fetchAllPosts } from "../API/STindex";
 
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
@@ -13,24 +15,35 @@ export default function NewPostForm() {
 
 	const [successMessage, setSuccessMessage] = useState(null);
 
+	// access current state from redux store
+	// const userC = useSelector((state) => state.user.user);
+	const tokenC = useSelector((state) => state.user.token);
+	console.log("token C is", tokenC);
+
 	async function handleSubmit(event) {
 		event.preventDefault();
-		let postData = {
-			title: postTitle,
-			price: postPrice,
-			location: postLocation,
-			willDeliver: postDelivery,
-			description: postDescription,
-		};
-		console.log("postData", postData);
+		// let postData = {
+		// 	title: postTitle,
+		// 	price: postPrice,
+		// 	location: postLocation,
+		// 	willDeliver: postDelivery,
+		// 	description: postDescription,
+		// };
+		// console.log("postData", postData);
 
 		try {
 			const response = await fetch(`${API_URL}/posts`, {
 				method: "POST",
-				body: JSON.stringify(postData),
+				body: JSON.stringify({
+					post: {
+						title: `${postTitle}`,
+						price: `${postPrice}`,
+						description: `${postDescription}`,
+					},
+				}),
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: `Bearer ${token}`,
+					Authorization: `Bearer ${tokenC}`,
 				},
 			});
 			console.log("response from NPF: ", response);
@@ -38,7 +51,6 @@ export default function NewPostForm() {
 			console.log("result from NPF: ", result);
 			setSuccessMessage("Post submitted");
 			// fetchAllPosts();
-			// return postObj;
 		} catch (err) {
 			console.error("Oops, something went wrong with adding that post!", err);
 		}

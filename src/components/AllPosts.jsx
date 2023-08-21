@@ -2,13 +2,21 @@
 
 import { useState, useEffect } from "react";
 import { fetchAllPosts } from "../API/STindex";
-import SignUpForm from "./SignUpForm";
 import NewPostForm from "./NewPostForm";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { deletePost } from "../API/STindex";
 
-export default function AllPosts({ token, setToken }) {
+export default function AllPosts() {
 	const [posts, setPosts] = useState([]);
 	const [error, setError] = useState(null);
 	const [searchParam, setSearchParam] = useState("");
+
+	const navigate = useNavigate();
+
+	// access current state from redux store
+	const userA = useSelector((state) => state.user.user);
+	const tokenA = useSelector((state) => state.user.token);
 
 	useEffect(() => {
 		async function getAllPosts() {
@@ -21,6 +29,19 @@ export default function AllPosts({ token, setToken }) {
 		}
 		getAllPosts();
 	}, []);
+
+	async function handleDelete(event, postIdAP) {
+		console.log("entering handleDelete in AP", handleDelete);
+		event.preventDefault();
+
+		try {
+			const result = await deletePost(postIdAP, tokenA);
+			console.log(result);
+			navigate("/posts");
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
 	const postsToDisplay = searchParam
 		? posts.filter(
@@ -37,7 +58,7 @@ export default function AllPosts({ token, setToken }) {
 			</div>
 
 			<div>
-				<NewPostForm token={token} setToken={setToken} />
+				<NewPostForm />
 			</div>
 
 			<div>
@@ -55,6 +76,7 @@ export default function AllPosts({ token, setToken }) {
 			<div id="all-posts-gallery">
 				{error && <p>{error}</p>}
 				{postsToDisplay.map((post) => {
+					const postIdAP = post._id;
 					return (
 						<>
 							<div id="each-post">
@@ -64,7 +86,12 @@ export default function AllPosts({ token, setToken }) {
 								<h5>Location: {post.location}</h5>
 								<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
 								<p id="post-description">{post.description}</p>
-								<button>Message</button>
+								<p>postId is {post._id}</p>
+								<button
+									onSubmit={(event, postIdAP) => handleDelete(event, postIdAP)}
+								>
+									Delete Post
+								</button>
 							</div>
 						</>
 					);
