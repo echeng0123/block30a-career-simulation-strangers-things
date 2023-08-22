@@ -49,7 +49,7 @@ export default function EditPost(postId) {
 
 			if (location.pathname === "/profile") {
 				// navigate(0); // forced refresh ends session
-				navigate("/posts"); // can't simulate refresh but if a user now clicks back to /profile they will see the updated post
+				navigate("/posts"); // can't simulate refresh or will end session but if a user now clicks back to /profile they will see the updated post
 			} else if (location == "/posts") {
 				navigate("/profile");
 			}

@@ -69,3 +69,21 @@ export async function editPost(postObj, postIdEP, tokenA) {
 		console.error(error);
 	}
 }
+
+export async function messageSeller(postObj, postIdMP, tokenF) {
+	try {
+		const response = await fetch(`${API_URL}/posts/${postIdMP}/messages`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${tokenF}`,
+			},
+			body: postObj,
+		});
+		const result = await response.json();
+		console.log("result from message seller", result);
+		return result;
+	} catch (error) {
+		console.error("Can't message seller", error);
+	}
+}

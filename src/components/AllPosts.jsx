@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 import { fetchAllPosts } from "../API/STindex";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { deletePost } from "../API/STindex";
 import { currentUser, currentToken } from "../redux/authSlice";
 import { fetchUserProfile } from "../API/STindex";
 
 import NewPostForm from "./NewPostForm";
 import EditPost from "./EditPost";
 import DeletePost from "./DeletePost";
+import MessagePost from "./MessagePost";
 
 export default function AllPosts() {
 	const [posts, setPosts] = useState([]);
@@ -46,7 +46,6 @@ export default function AllPosts() {
 			if (response.success) {
 				setAPusername(response.data.username);
 				setAPuserId(response.data._id);
-				console.log("APUserId: ", APuserId);
 			} else {
 				setError(response.error);
 				navigate("/posts");
@@ -55,6 +54,7 @@ export default function AllPosts() {
 		getUserProfile();
 	}, []);
 
+	// allows for search functionality
 	const postsToDisplay = searchParam
 		? posts.filter(
 				(post) =>
@@ -98,6 +98,14 @@ export default function AllPosts() {
 								<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
 								<p id="post-description">{post.description}</p>
 
+								{/* Only show message seller button if user is logged in and not on user's own post*/}
+								{APusername && APusername != post.author.username ? (
+									<MessagePost postId={postIdAP} />
+								) : (
+									<></>
+								)}
+
+								{/* Only show edit & delete buttons on posts made by the logged in user */}
 								{APusername == post.author.username ? (
 									<div>
 										<EditPost postId={postIdAP} />
