@@ -33,15 +33,15 @@ export const fetchUserProfile = async (token) => {
 	}
 };
 
-export async function deletePost(postIdB, tokenB) {
+export async function deletePost(postIdDP, tokenD) {
 	console.log("entering delete");
 
 	try {
-		const response = await fetch(`${API_URL}/posts/${postIdB}`, {
+		const response = await fetch(`${API_URL}/posts/${postIdDP}`, {
 			method: "DELETE",
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${tokenB}`,
+				Authorization: `Bearer ${tokenD}`,
 			},
 		});
 		const result = await response.json();

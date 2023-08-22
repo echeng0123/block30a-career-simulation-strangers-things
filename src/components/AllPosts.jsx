@@ -2,13 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { fetchAllPosts } from "../API/STindex";
-import NewPostForm from "./NewPostForm";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { deletePost } from "../API/STindex";
-import EditPost from "./EditPost";
 import { currentUser, currentToken } from "../redux/authSlice";
 import { fetchUserProfile } from "../API/STindex";
+
+import NewPostForm from "./NewPostForm";
+import EditPost from "./EditPost";
+import DeletePost from "./DeletePost";
 
 export default function AllPosts() {
 	const [posts, setPosts] = useState([]);
@@ -51,19 +53,6 @@ export default function AllPosts() {
 		}
 		getUserProfile();
 	}, []);
-
-	// async function handleDelete(event, postIdAP) {
-	// 	console.log("entering handleDelete in AP");
-	// 	event.preventDefault();
-
-	// 	try {
-	// 		const result = await deletePost(postIdAP, tokenA);
-	// 		console.log(result);
-	// 		navigate("/posts");
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// }
 
 	const postsToDisplay = searchParam
 		? posts.filter(
@@ -108,18 +97,12 @@ export default function AllPosts() {
 								<h5>Location: {post.location}</h5>
 								<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
 								<p id="post-description">{post.description}</p>
-								<p>postId is {post._id}</p>
-								{/* <button
-									onSubmit={(event, postIdAP) => handleDelete(event, postIdAP)}
-								>
-									Delete Post
-								</button> */}
-								<p>postauthorusername is {post.author.username}</p>
-								<p>userA is {APusername}</p>
-								<p>userID is {APuserId}</p>
-								{/* <EditPost postId={postIdAP} /> */}
+
 								{APusername == post.author.username ? (
-									<EditPost postId={postIdAP} />
+									<div>
+										<EditPost postId={postIdAP} />
+										<DeletePost postId={postIdAP} />
+									</div>
 								) : (
 									<></>
 								)}
@@ -131,3 +114,9 @@ export default function AllPosts() {
 		</div>
 	);
 }
+
+/* <button
+									onSubmit={(event, postIdAP) => handleDelete(event, postIdAP)}
+								>
+									Delete Post
+								</button> */

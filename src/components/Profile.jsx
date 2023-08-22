@@ -2,9 +2,10 @@
 import { fetchAllPosts, fetchUserProfile } from "../API/STindex";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { deletePost } from "../API/STindex";
 import { useSelector } from "react-redux";
+
 import EditPost from "./EditPost";
+import DeletePost from "./DeletePost";
 
 export default function Profile() {
 	const [userPosts, setUserPosts] = useState([]);
@@ -35,23 +36,6 @@ export default function Profile() {
 		}
 		getUserProfile();
 	}, []);
-
-	async function handleDelete(event, postIdA) {
-		event.preventDefault();
-		console.log("entering handledelete");
-
-		const postIdB = postIdA;
-		const tokenB = tokenA;
-		console.log("postIdB is", postIdB);
-
-		try {
-			const result = await deletePost(postIdB, tokenB);
-			console.log("result from handle delete", result);
-			// navigate("/profile");
-		} catch (error) {
-			console.error(error);
-		}
-	}
 
 	const userPostsToDisplay = searchParam
 		? userPosts.filter(
@@ -97,13 +81,9 @@ export default function Profile() {
 									<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
 									<p id="post-description">{post.description}</p>
 									<p>postid: {postIdA}</p>
-									<button
-										onSubmit={(event, postIdA) => handleDelete(event, postIdA)}
-									>
-										Delete Post
-									</button>
 									<div>
 										<EditPost postId={postIdA} />
+										<DeletePost postId={postIdA} />
 									</div>
 								</div>
 							</>
