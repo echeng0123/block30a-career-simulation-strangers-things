@@ -14,4 +14,5 @@
 <li><a href="https://64e458ef2450fe2cf1e60a62--cozy-scone-5d65e9.netlify.app/" target="_blank">Here is the production deploy</a>, though for some reason the logout functionality only works in the dev build and not on the deploy. sad! </li>
 <li><a href="https://github.com/users/echeng0123/projects/4/views/1" target="_blank">Here is my github projects board. </a>The google doc is also linked there. </li>
 <li><a href="https://docs.google.com/presentation/d/1cFZn-sg7v4uiLfzGR-GF50r1z4-TmhXdpr1oT_gV_ys/edit#slide=id.p" target="_blank">Here is my project planning</a>. <strong>For the purposes of assessing project planning and organization, please use this. </strong> Most of my notes and organization for initial planning then subsequent debugging lives in this document. It also includes in-progress shots to show how the progression occurred over stages. </li>
+<li>I did finish writing tests but they weren't running correctly due to jest-environment-jsdom issues I wasn't able to fix. But I think they should at least run if you have your Jest set up and working. *hand wavy TDD sounds*</li>
 
