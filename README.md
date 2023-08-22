@@ -1,5 +1,7 @@
 <h1>Career Simulation notes: PLEASE READ BEFORE OPENING SITE </h1>
 
+<h3>YES THIS IS THE CORRECT BRANCH, not MAIN. TRY-7-HARDCODED-TOKEN (it actually uses redux, not a hardcoded token)</h3>
+
 <h2>Notes on using the site: </h2>
 <li>Try not to refresh the page because it will end your session. If you do refresh, or if a refresh occurs, the site has built in routing to the Login page for protection.</li>
 <li>Login times can be a little slow. If you login and press submit and nothing happens, wait a few seconds - this part is a little slow and has taken me up to 5 seconds. Sorry!</li>
