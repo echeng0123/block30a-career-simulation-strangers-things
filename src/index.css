@@ -82,7 +82,8 @@ button:focus-visible {
 }
 
 #site-header{
-    font-size: 2rem;
+    font-size: 5rem;
+    border: 2px solid blue;
 }
 
 #main-section{
