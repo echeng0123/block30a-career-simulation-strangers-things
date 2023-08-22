@@ -128,3 +128,9 @@ button:focus-visible {
 #token-header{
     overflow-wrap: break-word;
 }
+
+#your-posts-header{
+    color: red;
+    align-self: center; 
+    justify-content: center;
+}

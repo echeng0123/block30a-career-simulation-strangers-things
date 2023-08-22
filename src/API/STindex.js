@@ -53,11 +53,6 @@ export async function deletePost(postIdB, tokenB) {
 }
 
 export async function editPost(postObj, postIdEP, tokenA) {
-	console.log("entering edit post");
-	console.log("postObj inside EP: ", postObj);
-	console.log("postIdEP inside EP: ", postIdEP);
-	console.log("tokenA inside EP: ", tokenA);
-
 	try {
 		const response = await fetch(`${API_URL}/posts/${postIdEP}`, {
 			method: "PATCH",
@@ -68,37 +63,10 @@ export async function editPost(postObj, postIdEP, tokenA) {
 			body: postObj,
 		});
 		const result = await response.json();
-		console.log("result from edit post", result);
+		alert("Successfully edited post.");
 		return result;
 	} catch (error) {
+		alert("Can't edit post, please login again.");
 		console.error(error);
 	}
 }
-
-// export async function handleEditClick(
-// 	event,
-// 	newTitle,
-// 	newDescription,
-// 	newPrice,
-// 	newLocation,
-// 	newDelivery,
-// 	postIdAP,
-// 	tokenA
-// ) {
-// 	console.log("entering handleEdit in edit post");
-
-// 	try {
-// 		const result = await editPost(
-// 			newTitle,
-// 			newDescription,
-// 			newPrice,
-// 			newLocation,
-// 			newDelivery,
-// 			postIdAP,
-// 			tokenA
-// 		);
-// 		console.log(result);
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// }

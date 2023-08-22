@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { editPost } from "../API/STindex";
 import { TextField, InputLabel, Select, MenuItem } from "@mui/material";
 
@@ -13,12 +14,11 @@ export default function EditPost(postId) {
 	const [newLocation, setNewLocation] = useState("");
 	const [newDelivery, setNewDelivery] = useState(false);
 
-	console.log("postId inside Edit Post component: ", postId);
+	const navigate = useNavigate();
+
 	const postIdEP = postId.postId;
-	console.log("postIdEP inside Edit Post: ", postIdEP);
 
 	// access current state from redux store
-	const userA = useSelector((state) => state.user.user);
 	const tokenA = useSelector((state) => state.user.token);
 
 	function handleClick() {
@@ -30,8 +30,6 @@ export default function EditPost(postId) {
 	};
 
 	async function handleEdit(event) {
-		console.log("entering handle edit click");
-		console.log("postIdEP inside handleEdit function: ", postIdEP);
 		event.preventDefault();
 
 		let postObj = JSON.stringify({
@@ -44,10 +42,9 @@ export default function EditPost(postId) {
 			},
 		});
 
-		console.log("postObj", postObj);
-
 		try {
 			editPost(postObj, postIdEP, tokenA);
+			navigate("/posts");
 		} catch (err) {
 			console.error("can't edit post", err);
 		}

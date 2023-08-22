@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { deletePost } from "../API/STindex";
 import { useSelector } from "react-redux";
+import EditPost from "./EditPost";
 
 export default function Profile() {
 	const [userPosts, setUserPosts] = useState([]);
@@ -18,7 +19,7 @@ export default function Profile() {
 	const userA = useSelector((state) => state.user.user);
 	const tokenA = useSelector((state) => state.user.token);
 
-	console.log("tokenA from profile", tokenA);
+	// console.log("tokenA from profile", tokenA);
 
 	useEffect(() => {
 		async function getUserProfile() {
@@ -63,12 +64,12 @@ export default function Profile() {
 	return (
 		<>
 			<div>
-				<h2>Welcome, {profileUsername}.</h2>
+				<h1>Welcome, {profileUsername}.</h1>
 				<h3>Your user id is: {userId}</h3>
 			</div>
 			<div>
 				<label>
-					Search:{" "}
+					Search your active posts:{" "}
 					<input
 						type="text"
 						placeholder="Search title or description"
@@ -77,6 +78,9 @@ export default function Profile() {
 						}
 					/>
 				</label>
+			</div>
+			<div id="your-posts-header">
+				<h2>Your Active Listings: </h2>
 			</div>
 			<div id="all-posts-gallery">
 				{error && <p>{error}</p>}
@@ -92,18 +96,21 @@ export default function Profile() {
 									<h5>Location: {post.location}</h5>
 									<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
 									<p id="post-description">{post.description}</p>
-									<p>postid is {postIdA}</p>
+									<p>postid: {postIdA}</p>
 									<button
 										onSubmit={(event, postIdA) => handleDelete(event, postIdA)}
 									>
 										Delete Post
 									</button>
+									<div>
+										<EditPost postId={postIdA} />
+									</div>
 								</div>
 							</>
 						);
 					} else {
 						return (
-							<div>
+							<div key={postIdA}>
 								<h1>You have no active posts.</h1>
 							</div>
 						);

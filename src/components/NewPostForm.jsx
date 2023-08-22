@@ -1,4 +1,4 @@
-import TextField from "@mui/material/TextField";
+import { TextField, InputLabel, Select, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { fetchAllPosts } from "../API/STindex";
@@ -18,6 +18,10 @@ export default function NewPostForm() {
 	// access current state from redux store
 	// const userC = useSelector((state) => state.user.user);
 	const tokenC = useSelector((state) => state.user.token);
+
+	const handleChange = (event) => {
+		setpostDelivery(event.target.value);
+	};
 
 	async function handleSubmit(event) {
 		event.preventDefault();
@@ -69,11 +73,17 @@ export default function NewPostForm() {
 					value={postLocation}
 					onChange={(e) => setpostLocation(e.target.value)}
 				/>
-				<TextField
-					label="Delivery Available"
+				<InputLabel id="simple-select-label">Delivery Available?</InputLabel>
+				<Select
+					labelId="simple-select-label"
+					id="simple-select"
 					value={postDelivery}
-					onChange={(e) => setpostDelivery(e.target.value)}
-				/>
+					label="delivery"
+					onChange={handleChange}
+				>
+					<MenuItem value={false}>No</MenuItem>
+					<MenuItem value={true}>Yes</MenuItem>
+				</Select>
 				<TextField
 					label="Description"
 					value={postDescription}

@@ -7,18 +7,23 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { deletePost } from "../API/STindex";
 import EditPost from "./EditPost";
+import { currentUser, currentToken } from "../redux/authSlice";
+import { fetchUserProfile } from "../API/STindex";
 
 export default function AllPosts() {
 	const [posts, setPosts] = useState([]);
 	const [error, setError] = useState(null);
 	const [searchParam, setSearchParam] = useState("");
+	const [APuserId, setAPuserId] = useState("");
+	const [APusername, setAPusername] = useState("");
 
 	const navigate = useNavigate();
 
 	// access current state from redux store
-	const userA = useSelector((state) => state.user.user);
-	const tokenA = useSelector((state) => state.user.token);
+	const userD = useSelector(currentUser);
+	const tokenD = useSelector(currentToken);
 
+	// render all posts
 	useEffect(() => {
 		async function getAllPosts() {
 			const APIResponse = await fetchAllPosts();
@@ -29,6 +34,22 @@ export default function AllPosts() {
 			}
 		}
 		getAllPosts();
+	}, []);
+
+	// get user profile details to conditionally render edit, delete buttons on only posts that are authored by the logged in user
+	useEffect(() => {
+		async function getUserProfile() {
+			const response = await fetchUserProfile(tokenD);
+			if (response.success) {
+				setAPusername(response.data.username);
+				setAPuserId(response.data._id);
+				console.log("APUserId: ", APuserId);
+			} else {
+				setError(response.error);
+				navigate("/posts");
+			}
+		}
+		getUserProfile();
 	}, []);
 
 	// async function handleDelete(event, postIdAP) {
@@ -93,7 +114,15 @@ export default function AllPosts() {
 								>
 									Delete Post
 								</button> */}
-								<EditPost postId={postIdAP} />
+								<p>postauthorusername is {post.author.username}</p>
+								<p>userA is {APusername}</p>
+								<p>userID is {APuserId}</p>
+								{/* <EditPost postId={postIdAP} /> */}
+								{APusername == post.author.username ? (
+									<EditPost postId={postIdAP} />
+								) : (
+									<></>
+								)}
 							</div>
 						</>
 					);
