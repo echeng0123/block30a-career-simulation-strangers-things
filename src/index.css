@@ -88,6 +88,7 @@ button:focus-visible {
 
 #site-header{
     font-size: 7rem;
+    margin: 2rem 0 4rem 0;
     font-family:'Barriecito',"sans-serif";
     color: rgb(234, 0, 211);
     text-shadow: 4px 4px 5px black;
@@ -119,9 +120,18 @@ button:focus-visible {
 
 #all-posts-gallery{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: flex-end;
     flex-wrap: wrap;
+}
+
+#user-posts-gallery{
+    display: grid;
+    justify-content: center;
+}
+
+#your-post-heading{
+    word-wrap: break-word;
 }
 
 #each-post{
@@ -151,6 +161,7 @@ button:focus-visible {
 
 }
 
+
 #back-to-top-text{
     color: white;
 }
@@ -160,9 +171,37 @@ button:focus-visible {
     font-size: 1.5rem;
 }
 
+/* NEW POST STYLING */
+
+#new-post-header{
+    text-shadow: 2px 2px 2px white;
+}
+
 #new-post-form-container{
     color: white;
+    display: grid;
+    align-self: center;
+    justify-content: center;
+    padding: 0 1rem;
 }
+
+#NP-delivery-label{
+    background-color: white;
+}
+
+#NP-input-box{
+    background-color: white;
+    border: 1px solid red;
+}
+
+#np-button{
+    margin: 2rem;
+    padding: 1rem 5rem;
+    max-width: 20dvw;
+    font-family: 'Barriecito',"sans-serif";
+    font-size: 1.2rem;
+}
+
 
 #token-header{
     overflow-wrap: break-word;
@@ -187,8 +226,20 @@ button:focus-visible {
     margin: 1rem;
 }
 
+#search-posts{
+    font-weight: bold;
+    font-size: 2rem;
+    text-shadow: 2px 2px 2px white;
+}
+
+#search-posts-bar{
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: white;
+    color: black;
+}
+
 #posts-section-profile{
-    border: 2px dotted rgb(0, 0, 0);
     margin: 0 1rem;
     background-color: rgb(219, 228, 255, 0.7);
     padding: 2rem;
@@ -242,6 +293,7 @@ button:focus-visible {
 #messages-panel{
     background-color: rgb(219, 228, 255, 0.9);
     display: grid;
+    padding: 2rem;
 }
 
 #search-messages{
@@ -253,6 +305,7 @@ button:focus-visible {
     background-color: lightskyblue;
     border-radius: 10px;
     padding: 0.2rem 1rem;
+    margin: 1rem;
 }
 
 #message-inbox{
@@ -262,6 +315,7 @@ button:focus-visible {
 #clickable-message-button{
     background-color: lightskyblue;
     margin: 0.5rem;
+    box-shadow: 2px 2px 2px 3px rgba(0,0,0,0.7);
 }
 
 #single-message-pane{

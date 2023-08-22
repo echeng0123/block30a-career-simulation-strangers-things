@@ -47,10 +47,11 @@ export default function MessagePanelClickable() {
 				<div id="your-posts-header">
 					<h2>Sent Messages: </h2>
 				</div>
-				<div>
+				<div id="search-posts">
 					<label>
 						Search your sent messages:{" "}
 						<input
+							id="search-posts-bar"
 							type="text"
 							placeholder="Search title or description"
 							onChange={(event) =>

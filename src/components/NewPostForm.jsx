@@ -60,26 +60,30 @@ export default function NewPostForm() {
 	return (
 		<>
 			{successMessage && <p>{successMessage}</p>}
+			<h2 id="new-post-header">Create a New Post</h2>
 			<form onSubmit={handleSubmit} id="new-post-form-container">
 				<TextField
+					id="NP-input-box"
 					label="Name"
 					value={postTitle}
 					onChange={(e) => setpostTitle(e.target.value)}
 				/>
 				<TextField
+					id="NP-input-box"
 					label="Price"
 					value={postPrice}
 					onChange={(e) => setpostPrice(e.target.value)}
 				/>
 				<TextField
+					id="NP-input-box"
 					label="Location"
 					value={postLocation}
 					onChange={(e) => setpostLocation(e.target.value)}
 				/>
-				<InputLabel id="simple-select-label">Delivery Available?</InputLabel>
+				<InputLabel id="NP-delivery-label">Delivery Available?</InputLabel>
 				<Select
 					labelId="simple-select-label"
-					id="simple-select"
+					id="NP-input-box"
 					value={postDelivery}
 					label="delivery"
 					onChange={handleChange}
@@ -88,11 +92,14 @@ export default function NewPostForm() {
 					<MenuItem value={true}>Yes</MenuItem>
 				</Select>
 				<TextField
+					id="NP-input-box"
 					label="Description"
 					value={postDescription}
 					onChange={(e) => setpostDescription(e.target.value)}
 				/>
-				<button type="submit">Submit</button>
+				<button type="submit" id="np-button">
+					Submit
+				</button>
 			</form>
 		</>
 	);

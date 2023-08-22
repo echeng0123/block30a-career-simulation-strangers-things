@@ -86,7 +86,7 @@ export default function Profile() {
 							/>
 						</label>
 					</div>
-					<div id="all-posts-gallery">
+					<div id="user-posts-gallery">
 						{error && <p>{error}</p>}
 						{userPostsToDisplay.map((post) => {
 							const postIdA = post._id;
@@ -94,7 +94,7 @@ export default function Profile() {
 								return (
 									<>
 										<div id="each-post">
-											<h3>{post.title}</h3>
+											<h3 id="your-post-heading">{post.title}</h3>
 											<h5>Seller: {post.author.username}</h5>
 											<h5 id="post-price">Price: {post.price}</h5>
 											<h5>Location: {post.location}</h5>

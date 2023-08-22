@@ -69,14 +69,20 @@ export default function AllPosts() {
 				<h1>AVAILABLE LISTINGS</h1>
 			</div>
 
-			<div>
-				<NewPostForm />
-			</div>
+			{/* only render new post form if user is logged in */}
+			{APusername ? (
+				<div>
+					<NewPostForm />
+				</div>
+			) : (
+				<></>
+			)}
 
-			<div>
+			<div id="search-posts">
 				<label>
 					Search:{" "}
 					<input
+						id="search-posts-bar"
 						type="text"
 						placeholder="Search title or description"
 						onChange={(event) =>
