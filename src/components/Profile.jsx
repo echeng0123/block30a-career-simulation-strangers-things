@@ -15,12 +15,10 @@ export default function Profile() {
 	const [userId, setUserId] = useState("");
 	const [error, setError] = useState(null);
 	const [searchParam, setSearchParam] = useState("");
-	const [searchMessageParam, setSearchMessageParam] = useState("");
 
 	const navigate = useNavigate();
 
 	// access current state from redux store
-	const userA = useSelector((state) => state.user.user);
 	const tokenA = useSelector((state) => state.user.token);
 
 	// console.log("tokenA from profile", tokenA);
@@ -48,14 +46,6 @@ export default function Profile() {
 					post.description.toLowerCase().includes(searchParam)
 		  )
 		: userPosts;
-
-	const userMessagesToDisplay = searchMessageParam
-		? userMessages.filter(
-				(message) =>
-					message.post.title.toLowerCase().includes(searchMessageParam) ||
-					message.content.toLowerCase().includes(searchMessageParam)
-		  )
-		: userMessages;
 
 	return (
 		<>
@@ -90,6 +80,8 @@ export default function Profile() {
 						{error && <p>{error}</p>}
 						{userPostsToDisplay.map((post) => {
 							const postIdA = post._id;
+
+							// if post has not been "deleted" it will be "active" in the API
 							if (post.active) {
 								return (
 									<>
@@ -116,6 +108,11 @@ export default function Profile() {
 					</div>
 				</div>
 			</div>
+			<button id="back-to-top-button">
+				<a href="#top" id="back-to-top-text">
+					Back to Top
+				</a>
+			</button>
 		</>
 	);
 }

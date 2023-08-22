@@ -33,8 +33,6 @@ export const fetchUserProfile = async (token) => {
 };
 
 export async function deletePost(postIdDP, tokenD) {
-	console.log("entering delete");
-
 	try {
 		const response = await fetch(`${API_URL}/posts/${postIdDP}`, {
 			method: "DELETE",
@@ -44,7 +42,6 @@ export async function deletePost(postIdDP, tokenD) {
 			},
 		});
 		const result = await response.json();
-		console.log("result from delete", result);
 		return result;
 	} catch (error) {
 		console.error(error);
@@ -81,7 +78,6 @@ export async function messageSeller(postObj, postIdMP, tokenF) {
 			body: postObj,
 		});
 		const result = await response.json();
-		console.log("result from message seller", result);
 		return result;
 	} catch (error) {
 		console.error("Can't message seller", error);

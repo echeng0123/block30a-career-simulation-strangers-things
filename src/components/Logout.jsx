@@ -10,6 +10,6 @@ export default function Logout() {
 	const navigate = useNavigate();
 	useEffect(() => {
 		navigate(0);
-		navigate("/login");
+		navigate("/home");
 	}, []);
 }

@@ -28,6 +28,7 @@ export default function MessagePanel() {
 		getUserMessages();
 	}, []);
 
+	// allow search functionality for messages panel
 	const userMessagesToDisplay = searchMessageParam
 		? userMessages.filter(
 				(message) =>

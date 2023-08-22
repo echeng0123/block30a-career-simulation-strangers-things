@@ -169,6 +169,7 @@ button:focus-visible {
 #back-to-top-button{
     font-family: 'Barriecito',"sans-serif";
     font-size: 1.5rem;
+    max-width: 20dvw;
 }
 
 /* NEW POST STYLING */

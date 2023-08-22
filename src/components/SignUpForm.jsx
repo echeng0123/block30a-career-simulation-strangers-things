@@ -1,6 +1,7 @@
 // This component allows the user to create an account.
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
@@ -11,6 +12,8 @@ export default function SignUpForm() {
 	const [password, setPassword] = useState("");
 	const [successMessage, setSuccessMessage] = useState(null);
 	const [error, setError] = useState(null);
+
+	const navigate = useNavigate();
 
 	const userObj = {
 		user: {
@@ -31,10 +34,8 @@ export default function SignUpForm() {
 				});
 				const result = await response.json();
 				setToken(result.data.token);
-				console.log("result from signing up ", result);
-				console.log("result.data.token is now: ", result.data.token);
-
 				setSuccessMessage("Sign up successful");
+				navigate("/login");
 			} else {
 				alert("Username too short. Please enter at least 3 characters.");
 				setUsername("");
@@ -49,9 +50,7 @@ export default function SignUpForm() {
 	return (
 		<div id="signin-container">
 			<h2 id="login-text">Sign up</h2>
-			{successMessage && <p>{successMessage}</p> && (
-				<p id="token-header">your token is {token}</p>
-			)}
+			{successMessage && <h2>{successMessage}</h2>}
 			{error && <p>{error}</p>}
 			<form onSubmit={handleSubmit}>
 				<div id="login-text">

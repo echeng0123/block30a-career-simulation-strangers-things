@@ -64,67 +64,74 @@ export default function AllPosts() {
 		: posts;
 
 	return (
-		<div id="all-posts-container">
-			<div id="all-posts-header">
-				<h1>AVAILABLE LISTINGS</h1>
-			</div>
-
-			{/* only render new post form if user is logged in */}
-			{APusername ? (
-				<div>
-					<NewPostForm />
+		<div>
+			<div id="all-posts-container">
+				<div id="all-posts-header">
+					<h1>AVAILABLE LISTINGS</h1>
 				</div>
-			) : (
-				<></>
-			)}
 
-			<div id="search-posts">
-				<label>
-					Search:{" "}
-					<input
-						id="search-posts-bar"
-						type="text"
-						placeholder="Search title or description"
-						onChange={(event) =>
-							setSearchParam(event.target.value.toLowerCase())
-						}
-					/>
-				</label>
+				{/* only render new post form if user is logged in */}
+				{APusername ? (
+					<div>
+						<NewPostForm />
+					</div>
+				) : (
+					<></>
+				)}
+
+				<div id="search-posts">
+					<label>
+						Search:{" "}
+						<input
+							id="search-posts-bar"
+							type="text"
+							placeholder="Search title or description"
+							onChange={(event) =>
+								setSearchParam(event.target.value.toLowerCase())
+							}
+						/>
+					</label>
+				</div>
+				<div id="all-posts-gallery">
+					{postsToDisplay.map((post) => {
+						const postIdAP = post._id;
+						return (
+							<>
+								<div id="each-post">
+									<h3 id="post-header">{post.title}</h3>
+									<h5>Seller: {post.author.username}</h5>
+									<h5 id="post-price">Price: {post.price}</h5>
+									<h5>Location: {post.location}</h5>
+									<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
+									<p id="post-description">{post.description}</p>
+
+									{/* Only show message seller button if user is logged in and not on user's own post*/}
+									{APusername && APusername != post.author.username ? (
+										<MessagePost postId={postIdAP} />
+									) : (
+										<></>
+									)}
+
+									{/* Only show edit & delete buttons on posts made by the logged in user */}
+									{APusername == post.author.username ? (
+										<div>
+											<EditPost postId={postIdAP} />
+											<DeletePost postId={postIdAP} />
+										</div>
+									) : (
+										<></>
+									)}
+								</div>
+							</>
+						);
+					})}
+				</div>
 			</div>
-			<div id="all-posts-gallery">
-				{postsToDisplay.map((post) => {
-					const postIdAP = post._id;
-					return (
-						<>
-							<div id="each-post">
-								<h3 id="post-header">{post.title}</h3>
-								<h5>Seller: {post.author.username}</h5>
-								<h5 id="post-price">Price: {post.price}</h5>
-								<h5>Location: {post.location}</h5>
-								<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
-								<p id="post-description">{post.description}</p>
-
-								{/* Only show message seller button if user is logged in and not on user's own post*/}
-								{APusername && APusername != post.author.username ? (
-									<MessagePost postId={postIdAP} />
-								) : (
-									<></>
-								)}
-
-								{/* Only show edit & delete buttons on posts made by the logged in user */}
-								{APusername == post.author.username ? (
-									<div>
-										<EditPost postId={postIdAP} />
-										<DeletePost postId={postIdAP} />
-									</div>
-								) : (
-									<></>
-								)}
-							</div>
-						</>
-					);
-				})}
-			</div>
+			<button id="back-to-top-button">
+				<a href="#top" id="back-to-top-text">
+					Back to Top
+				</a>
+			</button>
 		</div>
 	);
 }
