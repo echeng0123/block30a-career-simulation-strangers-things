@@ -22,7 +22,7 @@ export const fetchUserProfile = async (token) => {
 		});
 		const result = await response.json();
 		if (result.success) {
-			console.log(`User ${result.data.username} is here`);
+			console.log(`User ${result.data.username} has logged in`);
 		} else {
 			console.log("can't get user profile");
 		}

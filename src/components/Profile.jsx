@@ -9,10 +9,12 @@ import DeletePost from "./DeletePost";
 
 export default function Profile() {
 	const [userPosts, setUserPosts] = useState([]);
+	const [userMessages, setUserMessages] = useState([]);
 	const [profileUsername, setProfileUsername] = useState("");
 	const [userId, setUserId] = useState("");
 	const [error, setError] = useState(null);
 	const [searchParam, setSearchParam] = useState("");
+	const [searchMessageParam, setSearchMessageParam] = useState("");
 
 	const navigate = useNavigate();
 
@@ -27,7 +29,7 @@ export default function Profile() {
 			const response = await fetchUserProfile(tokenA);
 			if (response.success) {
 				setUserPosts(response.data.posts);
-				console.log("userPosts", userPosts);
+				setUserMessages(response.data.messages);
 				setProfileUsername(response.data.username);
 				setUserId(response.data._id);
 			} else {
@@ -45,6 +47,14 @@ export default function Profile() {
 					post.description.toLowerCase().includes(searchParam)
 		  )
 		: userPosts;
+
+	const userMessagesToDisplay = searchParam
+		? userMessages.filter(
+				(message) =>
+					message.post.title.toLowerCase().includes(searchMessageParam) ||
+					message.content.toLowerCase().includes(searchMessageParam)
+		  )
+		: userMessages;
 
 	return (
 		<>
@@ -64,12 +74,24 @@ export default function Profile() {
 					/>
 				</label>
 			</div>
+			<div>
+				<label>
+					Search your sent messages:{" "}
+					<input
+						type="text"
+						placeholder="Search title or description"
+						onChange={(event) =>
+							setSearchMessageParam(event.target.value.toLowerCase())
+						}
+					/>
+				</label>
+			</div>
 			<div id="your-posts-header">
 				<h2>Your Active Listings: </h2>
 			</div>
 			<div id="all-posts-gallery">
 				{error && <p>{error}</p>}
-				{userPosts.map((post) => {
+				{userPostsToDisplay.map((post) => {
 					const postIdA = post._id;
 					if (post.active) {
 						return (
@@ -91,6 +113,23 @@ export default function Profile() {
 					} else {
 						return <></>;
 					}
+				})}
+			</div>
+			<div id="messages-panel">
+				{error && <p>{error}</p>}
+				{userMessagesToDisplay.map((message) => {
+					const messageTitle = message.post.title;
+					// const messagePostId = message.post._id;
+					const messageContent = message.content;
+
+					return (
+						<>
+							<div id="each-message">
+								<h3>Re: Post: {messageTitle}</h3>
+								<p id="message-description">{messageContent}</p>
+							</div>
+						</>
+					);
 				})}
 			</div>
 		</>

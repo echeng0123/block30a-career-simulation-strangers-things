@@ -135,3 +135,9 @@ button:focus-visible {
     align-self: center; 
     justify-content: center;
 }
+
+/* ALL MESSAGING FORMATTING */
+
+#messages-panel{
+    border: 2px solid purple;
+}

@@ -89,7 +89,7 @@ export default function EditPost(postId) {
 							labelId="simple-select-label"
 							id="simple-select"
 							value={newDelivery}
-							label="delivery"
+							label="Delivery"
 							onChange={handleChange}
 						>
 							<MenuItem value={false}>No</MenuItem>

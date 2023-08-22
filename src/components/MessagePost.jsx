@@ -55,7 +55,7 @@ export default function MessagePost(postId) {
 						id="message-form-container"
 					>
 						<TextField
-							label="Name"
+							label="Message"
 							value={messageContent}
 							onChange={(e) => setMessageContent(e.target.value)}
 						/>
