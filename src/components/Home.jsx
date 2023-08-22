@@ -1,9 +1,38 @@
-// This component is the home page/landing page for the site. The landing for the page conditionally renders text depending on whether or not a user is logged in.
-
 import SignUpForm from "./SignUpForm";
-import { useState } from "react";
+import Login from "./Login";
+import { useSelector } from "react-redux";
+import { currentToken } from "../redux/authSlice";
 
 export default function Home() {
-	const [token, setToken] = useState(null);
-	return <SignUpForm token={token} setToken={setToken} />;
+	// get current state
+	const tokenHomeNow = useSelector(currentToken);
+	console.log("tokenHomeNow", tokenHomeNow);
+
+	// setTokenHome(tokenHomeNow);
+	return (
+		<div>
+			{tokenHomeNow ? (
+				<div>
+					<div>
+						<h1 id="home-header">Welcome!</h1>
+						<br />
+					</div>
+				</div>
+			) : (
+				<div>
+					<div>
+						<h1 id="home-header">Welcome</h1>
+						<br />
+						<div>
+							<SignUpForm />
+						</div>
+						<br />
+						<div>
+							<Login />
+						</div>
+					</div>
+				</div>
+			)}
+		</div>
+	);
 }

@@ -4,9 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: rgba(0, 0, 0, 0.87);
+  background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F3761881.jpg&f=1&nofb=1&ipt=d3cc844f07df9c88749fcd4bbe9571d416cdc0f346e8a8172267272df725d53e&ipo=images") fixed;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -16,12 +15,13 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #0c0156;
   text-decoration: inherit;
   margin: 1rem;
 }
 a:hover {
-  color: #535bf2;
+  color: #ea18d2;
+  text-decoration: underline;
 }
 
 body {
@@ -49,7 +49,9 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+    background-color: rgb(224, 130, 233);
+  border: 3px solid #646cff;
+  color: black;
 }
 button:focus,
 button:focus-visible {
@@ -70,53 +72,270 @@ button:focus-visible {
 }
 
 #app-container{
-    border: 2px solid red;
+    background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.fM41_djz9HSLniH9fMZCpwHaEK%26pid%3DApi&f=1&ipt=277c0d45053d053390beec8231b0f9d6dfbb8d9ea80517962a3bb7bcbae5c37e&ipo=images") fixed;
+    border: 2px solid white;
     margin: 1rem;
-    padding: 1rem;
+    padding: 2rem;
+    min-width: 50dvw;
 }
 
 #navbar-container{
-    border: 2px solid rgb(0, 255, 0);
+    background:url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp6209234.jpg&f=1&nofb=1&ipt=c82c200375e0e15dae188cbb6dc5ee421f755b30642f3fccb58e2616849f97f9&ipo=images") fixed; 
+    font-size: 2rem;
     margin: 1rem;
     padding: 1rem;
 }
 
 #site-header{
-    font-size: 2rem;
+    font-size: 7rem;
+    margin: 2rem 0 4rem 0;
+    font-family:'Barriecito',"sans-serif";
+    color: rgb(234, 0, 211);
+    text-shadow: 4px 4px 5px black;
+    text-decoration: underline; 
+    -webkit-text-stroke: 3px rgb(6, 23, 173);
+    /* border: 2px solid blue; */
 }
 
 #main-section{
-    border: 2px dotted goldenrod;
+    background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.UfEt6utjtGGx4Ja-F5C7sAHaEK%26pid%3DApi&f=1&ipt=c2e73d7c49d1e3d4cc35c83d5c5adb54b943256b9aa6f84380e6917797247016&ipo=images") fixed;
+    
     margin: 1rem;
     padding: 1rem;
 }
 
 #all-posts-container{
-    border: 2px dashed yellow;
+    background: url("https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp1878761.jpg&f=1&nofb=1&ipt=1ba39ad0619fdfcec3dc1f7583aee793971ee3fedefbdf743f868fc1c38411b6&ipo=images") fixed;
     margin: 1rem;
     padding: 1rem;
     display: grid;
 }
 
+#all-posts-header{
+    color: rgb(226, 98, 98);
+    text-shadow: 2px 2px 2px black;
+    font-family: "Arial Black","sans-serif";
+    font-size: 1.3rem;
+}
+
 #all-posts-gallery{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: flex-end;
     flex-wrap: wrap;
 }
 
+#user-posts-gallery{
+    display: grid;
+    justify-content: center;
+}
+
+#your-post-heading{
+    word-wrap: break-word;
+}
+
 #each-post{
-    border: 2px solid yellow;
+    background: rgb(144, 226, 219);
+    box-shadow: 2px 3px 3px 3px rgba(0,0,0,0.6);
     margin: 1rem;
     padding: 1rem;
     max-width: 15dvw;
     text-align: left;
+    font-family: "Arial Black",sans-serif;
+    font-size: 1.2rem;
+}
+
+#post-header{
+    text-decoration: underline;
 }
 
 #post-description{
-    font-size: 0.75rem;
+    font-size: 1.2rem;
+    word-wrap: normal;
+    font-family: Arial;
 }
 
 #post-price{
-    color: greenyellow;
+    color: rgb(5, 172, 41);
+    text-decoration: underline
+
+}
+
+
+#back-to-top-text{
+    color: white;
+}
+
+#back-to-top-button{
+    font-family: 'Barriecito',"sans-serif";
+    font-size: 1.5rem;
+    max-width: 20dvw;
+}
+
+/* NEW POST STYLING */
+
+#new-post-header{
+    text-shadow: 2px 2px 2px white;
+}
+
+#new-post-form-container{
+    color: white;
+    display: grid;
+    align-self: center;
+    justify-content: center;
+    padding: 0 1rem;
+}
+
+#NP-delivery-label{
+    background-color: white;
+}
+
+#NP-input-box{
+    background-color: white;
+    border: 1px solid red;
+}
+
+#np-button{
+    margin: 2rem;
+    padding: 1rem 5rem;
+    max-width: 20dvw;
+    font-family: 'Barriecito',"sans-serif";
+    font-size: 1.2rem;
+}
+
+
+#token-header{
+    overflow-wrap: break-word;
+}
+
+#your-posts-header{
+    color: rgb(0, 0, 0);
+    align-self: center; 
+    justify-content: center;
+}
+
+/* PROFILE PAGE */
+
+#profile-header-small{
+    background-color: rgb(121, 207, 250);
+    text-shadow: 2px 2px 2px white;
+    margin: 2rem;
+    padding: 0.2rem;
+}
+
+#buttons-self{
+    margin: 1rem;
+}
+
+#search-posts{
+    font-weight: bold;
+    font-size: 2rem;
+    text-shadow: 2px 2px 2px white;
+}
+
+#search-posts-bar{
+    font-weight: bold;
+    font-size: 2rem;
+    background-color: white;
+    color: black;
+}
+
+#posts-section-profile{
+    margin: 0 1rem;
+    background-color: rgb(219, 228, 255, 0.7);
+    padding: 2rem;
+}
+
+#profile-content{
+    background: url("https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpapers.co%2Fwallpaper%2Fpapers.co-vy12-simple-white-pattern-background-8-wallpaper.jpg&f=1&nofb=1&ipt=3463277b3216433fb57dc78bbc5afbc4421bf57af1614155393cfee365d29af2&ipo=images") fixed;
+    margin: 2dvw;
+    padding: 2dvw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* LOGIN SECTION */
+
+#login-container{
+    border: 2px solid white;
+    background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F1170519.png&f=1&nofb=1&ipt=e76101f4fd76c96a19b78362540930a1eb7a3ae8dd3f283ad9b0a47ff96646fd&ipo=images") fixed;
+    font-family: 'Barriecito',"sans-serif";
+    margin: 1rem;
+    padding: 1rem;
+}
+
+#signin-container{
+    border: 2px solid rgb(0, 0, 0);
+    background: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F1170519.png&f=1&nofb=1&ipt=e76101f4fd76c96a19b78362540930a1eb7a3ae8dd3f283ad9b0a47ff96646fd&ipo=images") fixed;
+    font-family: 'Barriecito',"sans-serif";
+    filter: invert(1);
+    margin: 1rem;
+    padding: 1rem;
+}
+
+#login-text{
+    font-size: 3rem;
+}
+
+#login-input{
+    font-size: 1.5rem;
+    background-color: white;
+    color: black;
+    font-family: 'Courier New', Courier, monospace
+}
+
+#login-button{
+    font-size: 1.3rem;
+}
+
+/* MESSAGES SECTION */
+
+#messages-panel{
+    background-color: rgb(219, 228, 255, 0.9);
+    display: grid;
+    padding: 2rem;
+}
+
+#search-messages{
+    background-color: white;
+    color:black;
+}
+
+#each-message{
+    background-color: lightskyblue;
+    border-radius: 10px;
+    padding: 0.2rem 1rem;
+    margin: 1rem;
+}
+
+#message-inbox{
+    display: grid;
+}
+
+#clickable-message-button{
+    background-color: lightskyblue;
+    margin: 0.5rem;
+    box-shadow: 2px 2px 2px 3px rgba(0,0,0,0.7);
+}
+
+#single-message-pane{
+    margin: 2dvw;
+    padding: 2dvw;
+}
+
+#clickable-messages{
+    display: grid;
+}
+
+
+#home-header{
+    font-size: 5rem;
+    font-family: 'Barriecito',"sans-serif";
+    background-color: rgb(137, 13, 13);
+    border: 2px solid white;
+    color: white;
+    text-shadow: 2px 3px 2px black;
+    padding:0;
+    margin:1rem;
 }

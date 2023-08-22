@@ -6,6 +6,7 @@ import Profile from "./Profile";
 import Messages from "./Messages";
 import Login from "./Login";
 import Home from "./Home";
+import Logout from "./Logout";
 
 export default function MainSection() {
 	return (
@@ -16,7 +17,7 @@ export default function MainSection() {
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/messages" element={<Messages />} />
 				<Route path="/login" element={<Login />} />
-				{/* conditionally render login component text */}
+				<Route path="/logout" element={<Logout />} />
 			</Routes>
 		</div>
 	);

@@ -1,5 +1,8 @@
-import TextField from "@mui/material/TextField";
+import { TextField, InputLabel, Select, MenuItem } from "@mui/material";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { fetchAllPosts } from "../API/STindex";
 
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
 const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
@@ -9,32 +12,46 @@ export default function NewPostForm() {
 	const [postPrice, setpostPrice] = useState("");
 	const [postLocation, setpostLocation] = useState("");
 	const [postDelivery, setpostDelivery] = useState(false);
-	const [postDescription, setpostDescription] = useState(false);
+	const [postDescription, setpostDescription] = useState("");
 
 	const [successMessage, setSuccessMessage] = useState(null);
+
+	const navigate = useNavigate();
+
+	// access current state from redux store
+	const tokenC = useSelector((state) => state.user.token);
+
+	const handleChange = (event) => {
+		setpostDelivery(event.target.value);
+	};
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 		let postData = {
-			title: postTitle,
-			price: postPrice,
-			location: postLocation,
-			imageUrl: postImage,
+			post: {
+				title: postTitle,
+				price: postPrice,
+				location: postLocation,
+				willDeliver: postDelivery,
+				description: postDescription,
+			},
 		};
-		console.log("postData", postData);
 
 		try {
 			const response = await fetch(`${API_URL}/posts`, {
 				method: "POST",
 				body: JSON.stringify(postData),
-				headers: { "Content-Type": "application/json" },
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${tokenC}`,
+				},
 			});
-			console.log("response: ", response);
+			console.log("response from NPF: ", response);
 			const result = await response.json();
-			console.log("result", result);
-			setSuccessMessage("Sign up successful");
-			// fetchAllPosts();
-			// return postObj;
+			console.log("result from NPF: ", result);
+			setSuccessMessage("Post submitted");
+			fetchAllPosts();
+			navigate("/profile");
 		} catch (err) {
 			console.error("Oops, something went wrong with adding that post!", err);
 		}
@@ -43,41 +60,46 @@ export default function NewPostForm() {
 	return (
 		<>
 			{successMessage && <p>{successMessage}</p>}
-			<form onSubmit={handleSubmit}>
+			<h2 id="new-post-header">Create a New Post</h2>
+			<form onSubmit={handleSubmit} id="new-post-form-container">
 				<TextField
+					id="NP-input-box"
 					label="Name"
-					value={postName}
-					onChange={(e) => setpostName(e.target.value)}
+					value={postTitle}
+					onChange={(e) => setpostTitle(e.target.value)}
 				/>
 				<TextField
-					label="Breed"
-					value={postBreed}
-					onChange={(e) => setpostBreed(e.target.value)}
+					id="NP-input-box"
+					label="Price"
+					value={postPrice}
+					onChange={(e) => setpostPrice(e.target.value)}
 				/>
 				<TextField
-					label="Image Url"
-					value={postImage}
-					onChange={(e) => setpostImage(e.target.value)}
+					id="NP-input-box"
+					label="Location"
+					value={postLocation}
+					onChange={(e) => setpostLocation(e.target.value)}
 				/>
-				<input
-					type="radio"
-					id="bench"
-					name="status"
-					value={postStatus}
-					onChange={() => setpostStatus("bench")}
-					label="On Bench"
-				></input>
-				<label htmlFor="bench">On Bench</label>
-				<input
-					type="radio"
-					id="field"
-					name="status"
-					value={postStatus}
-					onChange={() => setpostStatus("field")}
-					label="On Field"
-				></input>
-				<label htmlFor="field">On Field</label>
-				<button type="submit">Submit</button>
+				<InputLabel id="NP-delivery-label">Delivery Available?</InputLabel>
+				<Select
+					labelId="simple-select-label"
+					id="NP-input-box"
+					value={postDelivery}
+					label="delivery"
+					onChange={handleChange}
+				>
+					<MenuItem value={false}>No</MenuItem>
+					<MenuItem value={true}>Yes</MenuItem>
+				</Select>
+				<TextField
+					id="NP-input-box"
+					label="Description"
+					value={postDescription}
+					onChange={(e) => setpostDescription(e.target.value)}
+				/>
+				<button type="submit" id="np-button">
+					Submit
+				</button>
 			</form>
 		</>
 	);
