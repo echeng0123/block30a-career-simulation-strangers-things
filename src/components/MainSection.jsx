@@ -19,6 +19,11 @@ export default function MainSection() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/logout" element={<Logout />} />
 			</Routes>
+			<button id="back-to-top-button">
+				<a href="#top" id="back-to-top-text">
+					Back to Top
+				</a>
+			</button>
 		</div>
 	);
 }

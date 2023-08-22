@@ -47,17 +47,18 @@ export default function SignUpForm() {
 	}
 
 	return (
-		<>
-			<h2>Sign up</h2>
+		<div id="signin-container">
+			<h2 id="login-text">Sign up</h2>
 			{successMessage && <p>{successMessage}</p> && (
 				<p id="token-header">your token is {token}</p>
 			)}
 			{error && <p>{error}</p>}
 			<form onSubmit={handleSubmit}>
-				<div>
+				<div id="login-text">
 					<label>
 						Username:{" "}
 						<input
+							id="login-input"
 							value={username}
 							onChange={(e) => setUsername(e.target.value)}
 						/>
@@ -66,14 +67,15 @@ export default function SignUpForm() {
 					<label>
 						Password:{" "}
 						<input
+							id="login-input"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 					</label>
 				</div>
 				<br />
-				<button>Submit</button>
+				<button id="login-button">Submit</button>
 			</form>
-		</>
+		</div>
 	);
 }

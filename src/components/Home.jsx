@@ -4,7 +4,7 @@ import Login from "./Login";
 export default function Home() {
 	return (
 		<div>
-			<h1>Welcome</h1>
+			<h1 id="home-header">Welcome</h1>
 			<br />
 			<div>
 				<SignUpForm />

@@ -46,6 +46,7 @@ export default function MessagePanel() {
 					<label>
 						Search your sent messages:{" "}
 						<input
+							id="search-messages"
 							type="text"
 							placeholder="Search title or description"
 							onChange={(event) =>

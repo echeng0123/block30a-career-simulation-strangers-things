@@ -91,7 +91,7 @@ export default function AllPosts() {
 					return (
 						<>
 							<div id="each-post">
-								<h3>{post.title}</h3>
+								<h3 id="post-header">{post.title}</h3>
 								<h5>Seller: {post.author.username}</h5>
 								<h5 id="post-price">Price: {post.price}</h5>
 								<h5>Location: {post.location}</h5>

@@ -60,7 +60,9 @@ export default function EditPost(postId) {
 
 	return (
 		<div>
-			<button onClick={handleClick}>Edit Post</button>
+			<button onClick={handleClick} id="buttons-self">
+				Edit Post
+			</button>
 			{isOpen && (
 				<div>
 					<form
@@ -100,7 +102,9 @@ export default function EditPost(postId) {
 							value={newDescription}
 							onChange={(e) => setNewDescription(e.target.value)}
 						/>
-						<button type="submit">Submit Updates</button>
+						<button type="submit" id="buttons-self">
+							Submit Updates
+						</button>
 					</form>
 				</div>
 			)}

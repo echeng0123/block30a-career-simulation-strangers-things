@@ -60,13 +60,14 @@ export default function Login() {
 	}
 
 	return (
-		<div>
-			<h2>Login</h2>
+		<div id="login-container">
+			<h1 id="login-text">Login</h1>
 			<form onSubmit={(event) => handleClick(event)}>
-				<div>
+				<div id="login-text">
 					<label>
 						Username:{" "}
 						<input
+							id="login-input"
 							value={enterUsername}
 							onChange={(e) => setEnterUsername(e.target.value)}
 						/>
@@ -75,13 +76,14 @@ export default function Login() {
 					<label>
 						Password:{" "}
 						<input
+							id="login-input"
 							value={enterPassword}
 							onChange={(e) => setEnterPassword(e.target.value)}
 						/>
 					</label>
 				</div>
 				<br />
-				<button>Submit</button>
+				<button id="login-button">Submit</button>
 			</form>
 		</div>
 	);

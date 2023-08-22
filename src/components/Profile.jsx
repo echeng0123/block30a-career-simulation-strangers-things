@@ -59,22 +59,12 @@ export default function Profile() {
 
 	return (
 		<>
-			<div>
+			<div id="profile-header-small">
 				<h1>Welcome, {profileUsername}.</h1>
 				<h3>Your user id is: {userId}</h3>
 			</div>
 			<div id="profile-content">
 				<div id="messages-section-profile">
-					<label>
-						Search your sent messages:{" "}
-						<input
-							type="text"
-							placeholder="Search title or description"
-							onChange={(event) =>
-								setSearchMessageParam(event.target.value.toLowerCase())
-							}
-						/>
-					</label>
 					<div>
 						<MessagePanel />
 					</div>
@@ -87,6 +77,7 @@ export default function Profile() {
 						<label>
 							Search your active posts:{" "}
 							<input
+								id="search-messages"
 								type="text"
 								placeholder="Search title or description"
 								onChange={(event) =>
