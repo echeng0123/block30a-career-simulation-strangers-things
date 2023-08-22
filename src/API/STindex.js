@@ -24,8 +24,7 @@ export const fetchUserProfile = async (token) => {
 		if (result.success) {
 			console.log(`User ${result.data.username} is here`);
 		} else {
-			alert("can't get user profile");
-			console.log(result.message);
+			console.log("can't get user profile");
 		}
 		return result;
 	} catch (error) {

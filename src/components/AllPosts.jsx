@@ -33,6 +33,7 @@ export default function AllPosts() {
 				setPosts(APIResponse.data.posts);
 			} else {
 				setError(APIResponse.error.message);
+				console.log("error loading posts page");
 			}
 		}
 		getAllPosts();
@@ -85,7 +86,6 @@ export default function AllPosts() {
 				</label>
 			</div>
 			<div id="all-posts-gallery">
-				{error && <p>{error}</p>}
 				{postsToDisplay.map((post) => {
 					const postIdAP = post._id;
 					return (
@@ -114,9 +114,3 @@ export default function AllPosts() {
 		</div>
 	);
 }
-
-/* <button
-									onSubmit={(event, postIdAP) => handleDelete(event, postIdAP)}
-								>
-									Delete Post
-								</button> */

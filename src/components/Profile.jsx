@@ -32,7 +32,7 @@ export default function Profile() {
 				setUserId(response.data._id);
 			} else {
 				setError(response.error);
-				navigate("/posts");
+				navigate("/login");
 			}
 		}
 		getUserProfile();
