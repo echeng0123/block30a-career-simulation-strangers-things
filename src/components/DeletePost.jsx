@@ -8,6 +8,8 @@ import { deletePost } from "../API/STindex";
 export default function DeletePost(postId) {
 	const postIdDP = postId.postId;
 
+	const navigate = useNavigate();
+
 	// access current state from redux store
 	const tokenDP = useSelector((state) => state.user.token);
 
@@ -18,7 +20,7 @@ export default function DeletePost(postId) {
 		try {
 			const result = await deletePost(postIdDP, tokenDP);
 			console.log("result from handle delete", result);
-			// navigate("/posts");
+			navigate("/posts");
 		} catch (error) {
 			console.error(error);
 		}

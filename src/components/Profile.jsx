@@ -27,6 +27,7 @@ export default function Profile() {
 			const response = await fetchUserProfile(tokenA);
 			if (response.success) {
 				setUserPosts(response.data.posts);
+				console.log("userPosts", userPosts);
 				setProfileUsername(response.data.username);
 				setUserId(response.data._id);
 			} else {
@@ -70,7 +71,7 @@ export default function Profile() {
 				{error && <p>{error}</p>}
 				{userPosts.map((post) => {
 					const postIdA = post._id;
-					if (post.author == userId) {
+					if (post.active) {
 						return (
 							<>
 								<div id="each-post">
@@ -80,7 +81,6 @@ export default function Profile() {
 									<h5>Location: {post.location}</h5>
 									<h5>Delivery Available: {post.willDeliver ? "Yes" : "No"}</h5>
 									<p id="post-description">{post.description}</p>
-									<p>postid: {postIdA}</p>
 									<div>
 										<EditPost postId={postIdA} />
 										<DeletePost postId={postIdA} />
@@ -89,11 +89,7 @@ export default function Profile() {
 							</>
 						);
 					} else {
-						return (
-							<div key={postIdA}>
-								<h1>You have no active posts.</h1>
-							</div>
-						);
+						return <></>;
 					}
 				})}
 			</div>
