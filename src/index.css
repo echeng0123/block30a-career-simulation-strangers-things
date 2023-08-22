@@ -140,6 +140,7 @@ button:focus-visible {
 
 #messages-panel{
     border: 2px solid purple;
+    display: grid;
 }
 
 #posts-section-profile{
@@ -163,4 +164,23 @@ button:focus-visible {
 
 #each-message{
     border: 2px solid rgb(245, 59, 245);
+    margin: 1dvw;
+}
+
+/* messages page */
+
+#message-inbox{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#single-message-pane{
+    border: 2px dotted rgb(237, 12, 196);
+    margin: 2dvw;
+    padding: 2dvw;
+}
+
+#clickable-messages{
+    border: 2px dotted rgb(237, 12, 196);
+    display: grid;
 }

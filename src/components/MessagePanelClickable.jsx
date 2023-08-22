@@ -1,11 +1,15 @@
+// This component renders full messages in a panel clickable for "email inbox" functionality in the Messages page.
+
 // This component renders full messages in a panel
 
+// This component renders the logged in user profile.
 import { fetchUserProfile } from "../API/STindex";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ExpandMessage from "./ExpandMessage";
 
-export default function MessagePanel() {
+export default function MessagePanelClickable() {
 	const [userMessages, setUserMessages] = useState([]);
 	const [error, setError] = useState(null);
 	const [searchMessageParam, setSearchMessageParam] = useState("");
@@ -28,6 +32,7 @@ export default function MessagePanel() {
 		getUserMessages();
 	}, []);
 
+	// render all messages
 	const userMessagesToDisplay = searchMessageParam
 		? userMessages.filter(
 				(message) =>
@@ -55,17 +60,23 @@ export default function MessagePanel() {
 					</label>
 				</div>
 				<div>
+					<h4>Click messages for more details.</h4>
+				</div>
+				<div id="clickable-messages">
 					{error && <p>{error}</p>}
 					{userMessagesToDisplay.map((message) => {
 						const messageTitle = message.post.title;
 						const messageContent = message.content;
+						const messageId = message._id;
 
 						return (
 							<>
-								<div id="each-message">
-									<h3>Re: Post: {messageTitle}</h3>
-									<p id="message-description">{messageContent}</p>
-								</div>
+								<ExpandMessage
+									messageId={messageId}
+									messageTitle={messageTitle}
+									messageContent={messageContent}
+									userMessages={userMessages}
+								/>
 							</>
 						);
 					})}

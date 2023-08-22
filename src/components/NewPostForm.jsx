@@ -1,6 +1,7 @@
 import { TextField, InputLabel, Select, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { fetchAllPosts } from "../API/STindex";
 
 const cohortName = "2306-GHP-ET-WEB-FT-SF";
@@ -15,8 +16,9 @@ export default function NewPostForm() {
 
 	const [successMessage, setSuccessMessage] = useState(null);
 
+	const navigate = useNavigate();
+
 	// access current state from redux store
-	// const userC = useSelector((state) => state.user.user);
 	const tokenC = useSelector((state) => state.user.token);
 
 	const handleChange = (event) => {
@@ -49,6 +51,7 @@ export default function NewPostForm() {
 			console.log("result from NPF: ", result);
 			setSuccessMessage("Post submitted");
 			fetchAllPosts();
+			navigate("/profile");
 		} catch (err) {
 			console.error("Oops, something went wrong with adding that post!", err);
 		}
