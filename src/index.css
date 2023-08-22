@@ -136,8 +136,31 @@ button:focus-visible {
     justify-content: center;
 }
 
-/* ALL MESSAGING FORMATTING */
+/* profile formatting */
 
 #messages-panel{
     border: 2px solid purple;
+}
+
+#posts-section-profile{
+    border: 2px dotted yellow;
+}
+
+#messages-section-profile{
+    border: 2px dotted purple;
+    margin: 1dvw;
+    padding: 1dvw;
+}
+
+#profile-content{
+    border: 5px solid rgb(143, 255, 143);
+    margin: 2dvw;
+    padding: 2dvw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#each-message{
+    border: 2px solid rgb(245, 59, 245);
 }
