@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { editPost } from "../API/STindex";
 import { TextField, InputLabel, Select, MenuItem } from "@mui/material";
 
@@ -15,6 +15,7 @@ export default function EditPost(postId) {
 	const [newDelivery, setNewDelivery] = useState(false);
 
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	const postIdEP = postId.postId;
 
@@ -44,7 +45,14 @@ export default function EditPost(postId) {
 
 		try {
 			editPost(postObj, postIdEP, tokenA);
-			navigate("/posts");
+			setIsOpen(!isOpen); // close edit post button
+
+			if (location.pathname === "/profile") {
+				// navigate(0); // forced refresh ends session
+				navigate("/posts"); // can't simulate refresh but if a user now clicks back to /profile they will see the updated post
+			} else if (location == "/posts") {
+				navigate("/profile");
+			}
 		} catch (err) {
 			console.error("can't edit post", err);
 		}
