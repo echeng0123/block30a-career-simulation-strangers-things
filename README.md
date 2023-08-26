@@ -1,8 +1,5 @@
 <h1>Career Simulation notes: PLEASE READ BEFORE OPENING SITE </h1>
 
-<h3>YES THIS IS THE CORRECT BRANCH, not MAIN. TRY-7-HARDCODED-TOKEN (it actually uses redux, not a hardcoded token)</h3>
-<p>I copied this branch for safety and tried to merge that into main but it didn't work well so I'm just turning this one in out of fear of losing my work. </p>
-
 <h2>Notes on using the site: </h2>
 <h3>The site works better in run dev build mode - it is a little buggy in the production deploy. </h3>
 <li>Try not to refresh the page because it will end your session. If you do refresh, or if a refresh occurs, the site has built in routing to the Login page for protection.</li>
